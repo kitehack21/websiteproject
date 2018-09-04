@@ -1,0 +1,158 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "Baron",
+      "email": "B@ron.com",
+      "password": "test123"
+    }
+  ],
+  "artists": [
+    {
+      "id": 1,
+      "artistname": "Taeyeon (태연)",
+      "artistpicture": "https://img.kpopmap.com/2018/02/taeyeon1.jpg",
+      "debut" : "2018/08/02",
+      "birthday" : "1989.03.09",
+      "agency" : "SM Entertainment",
+      "albums": [
+        {
+          "id": 1,
+          "albumtitle": "Something New - The 3rd Mini Album",
+          "albumcover": "https://www.allkpop.com/upload/2018/06/af_org/21144236/Taeyeon.jpg",
+          "release": "2018/06/18",
+          "genre" : "R&B",
+          "publisher" : "IRIVER",
+          "songs": [
+            {
+              "id" : 1,
+              "title": "Something New",
+              "runtime" : "03:26",
+              "status" : "Title"
+            },
+            {
+              "id" : 2,
+              "title": "All Night Long",
+              "runtime" : "03:43",
+              "status" : "Hot"
+            },
+            {
+              "id" : 3,
+              "title": "Baram Baram Baram",
+              "runtime" : "03:28",
+              "status" : ""
+            },
+            {
+              "id" : 4,
+              "title": "One Day",
+              "runtime" : "03:31",
+              "status" : ""
+            },
+            {
+              "id" : 5,
+              "title": "Circus",
+              "runtime" : "03:54",
+              "status" : ""
+            },
+            {
+              "id" : 6,
+              "title": "Something New (Instrumental)",
+              "runtime" : "03:0",
+              "status" : ""
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "albumtitle": "My Voice - The 1st Album Deluxe",
+          "albumcover": "https://www.allkpop.com/upload/2017/04/af_org/Taeyeon_1491943838_af_org.jpg",
+          "release": "2017/04/05",
+          "genre" : "R&B",
+          "publisher" : "IRIVER",
+          "songs": [
+            {
+              "id" : 1,
+              "title": "Make Me Love You",
+              "runtime" : "03:27",
+              "status" : "Title"
+            },
+            {
+              "id" : 2,
+              "title": "Fine",
+              "runtime" : "03:29",
+              "status" : "Hot"
+            },
+            {
+              "id" : 3,
+              "title": "Cover Up",
+              "runtime" : "03:26",
+              "status" : ""
+            },
+            {
+              "id" : 4,
+              "title": "날개 (Feel So Fine)",
+              "runtime" : "03:39",
+              "status" : ""
+            },
+            {
+              "id" : 5,
+              "title": "I Got Love",
+              "runtime" : "03:10",
+              "status" : ""
+            },
+            {
+              "id" : 6,
+              "title": "I`m OK",
+              "runtime" : "03:34",
+              "status" : ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "songs" : [
+    {
+      "id" : 1,
+      "artistname": "Taeyeon (태연)",
+      "title": "Make Me Love You",
+      "runtime" : "03:27",
+      "status" : "Title"
+    },
+    {
+      "id" : 2,
+      "artistname": "Taeyeon (태연)",
+      "title": "Fine",
+      "runtime" : "03:29",
+      "status" : "Hot"
+    },
+    {
+      "id" : 3,
+      "artistname": "Taeyeon (태연)",
+      "title": "Cover Up",
+      "runtime" : "03:26",
+      "status" : ""
+    },
+    {
+      "id" : 4,
+      "artistname": "Taeyeon (태연)",
+      "title": "날개 (Feel So Fine)",
+      "runtime" : "03:39",
+      "status" : ""
+    },
+    {
+      "id" : 5,
+      "artistname": "Taeyeon (태연)",
+      "title": "I Got Love",
+      "runtime" : "03:10",
+      "status" : ""
+    },
+    {
+      "id" : 6,
+      "artistname": "Taeyeon (태연)",
+      "title": "I`m OK",
+      "runtime" : "03:34",
+      "status" : ""
+    }
+  ]
+}
