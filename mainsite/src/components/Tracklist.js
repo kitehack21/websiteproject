@@ -5,10 +5,10 @@ class Tracklist extends Component {
 
     renderTrackStatus(){
         console.log()
-        if(this.props.status == "Title"){
+        if(this.props.title_track){
             return <span className="badge bg-success" style={{margin: 5, color: "#ffffff"}}>Title-track</span>
         }
-        if(this.props.status == "Hot"){
+        if(this.props.status === "Hot"){
             return <span className="badge bg-danger" style={{margin: 5, color: "#ffffff"}}>Hot</span>
         }
     }
@@ -29,10 +29,10 @@ class Tracklist extends Component {
                     <i className="icon-control-pause text-active"></i>
                 </a>
                 <div className="clear text-ellipsis text-left">
-                    <strong>{this.props.id}</strong>
+                    <strong>{this.props.number}</strong>
                     <span className="pad-left">{this.props.title}</span>
                     <span className="text-muted">
-                    {this.renderTrackStatus()}-- {this.props.runtime}</span>
+                    {this.renderTrackStatus()}-- {this.props.playtime}</span>
                 </div>
             </li>
         )

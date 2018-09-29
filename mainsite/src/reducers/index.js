@@ -4,5 +4,5 @@ import AuthReducer from './AuthReducer'
 
 //Creates Global State
 export default combineReducers({
-    auth: AuthReducer
+    auth: AuthReducer,
 })

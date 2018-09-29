@@ -14,6 +14,10 @@ class RegisterPage extends Component {
         })
     }
 
+    //Redirects to SignIn page on click
+    onSignInClick = () =>{
+        this.props.history.push("/SignIn")
+    }
  
     render(){
         if(this.props.auth.username == ""){
@@ -43,7 +47,7 @@ class RegisterPage extends Component {
                         <Button onClick={this.onRegisterClick} className="btn btn-lg btn-primary lt b-white b-2x btn-block btn-rounded"><i className="icon-arrow-right pull-right"></i><span className="m-r-n-lg">Register</span></Button>
                         <div className="line line-dashed"></div>
                         <p className="text-muted text-center"><small>Already have an account?</small></p>
-                        <a href="signin.html" className="btn btn-lg btn-info btn-block btn-rounded">Sign in</a>
+                        <a className="btn btn-lg btn-info btn-block btn-rounded" onClick={()=>{this.onSignInClick()}}>Sign in</a>
                         </form>
                     </section>
                     </div>

@@ -5,11 +5,11 @@ import TopList from './TopList'
 class HomePage extends Component{
     render(){
         return(
-         <section id="content">
+         <section id="content " className="animated fadeInUp">
           <section className="hbox stretch">
             <section className ="vbox">
               <div className="row">
-                <section className="scrollable padder-lg w-f-md" id="bjax-target">
+                <section className="scrollable padder-lg w-f-md " id="bjax-target" >
                   <AlbumList/>
                   <TopList/>
                 </section>

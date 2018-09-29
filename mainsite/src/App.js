@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Route, withRouter } from 'react-router-dom';
-import './App.css';
+
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomePage from './components/HomePage'
@@ -8,6 +8,7 @@ import ArtistPage from './components/ArtistPage'
 import SignIn from './components/SignIn'
 import RegisterPage from './components/RegisterPage'
 import AlbumPage from './components/AlbumPage'
+import Admin from './components/Admin'
 import {connect} from 'react-redux'
 import Cookies from 'universal-cookie'
 import {keepLogin, cookieChecked} from './actions'
@@ -15,8 +16,8 @@ import {keepLogin, cookieChecked} from './actions'
 import './css/bootstrap.css'
 import './css/animate.css'
 import './css/font-awesome.min.css'
-import './css/app.css'
 import './css/font.css'
+import './css/app.css'
 import './css/simple-line-icons.css'
 
 const cookies = new Cookies();
@@ -52,8 +53,9 @@ class App extends Component {
             <Route path="/ArtistPage" component = {ArtistPage}/>
             <Route path="/RegisterPage" component = {RegisterPage}/>
             <Route path="/AlbumPage" component = {AlbumPage}/>
+            <Route path="/Admin" component = {Admin}/>
           </div>  
-          <Footer />      
+          {/* <Footer />       */}
         </div>
       );
     }

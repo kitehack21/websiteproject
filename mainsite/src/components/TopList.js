@@ -27,7 +27,7 @@ class TopList extends Component {
         console.log(this.state)
         return(
             <div>
-                <div className="col-md-4">
+                <div className="col-md-4 col-xs-12">
                     <h3 className="font-thin" align="left">Top Songs
                         <span className="musicbar animate inline m-l-sm" style={{width:20, height:20}}>
                             <span className="bar1 a1 bg-primary lter"></span>

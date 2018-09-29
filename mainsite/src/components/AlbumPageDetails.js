@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
+import axios from 'axios'
 import {Link} from 'react-router-dom';
 import Tracklist from './Tracklist'
+import {API_URL_1} from '../supports/api-url/apiurl'
 
 
 class AlbumPageDetails extends Component {
 
   renderTracklist(){
-    return this.props.albums[0].songs.map(songs =>
-      <Tracklist key={songs.id} id={songs.id} title={songs.title} runtime={songs.runtime} status={songs.status}/>
-    )
+    return (this.props.tracks.map(songs =>
+      <Tracklist key={songs.id} id={songs.id} title={songs.name} playtime={songs.playtime} 
+      title_track={songs.title_track} number = {songs.number}/>
+    ))
   }
-
+  
     render(){
         return(
             <section className="vbox">
@@ -24,8 +27,8 @@ class AlbumPageDetails extends Component {
                       <div className="col-sm-8">
                         <h2 className="m-t-none text-black text-justify">{this.props.albumtitle}</h2>
                         <div className="clearfix m-b-lg">
-                          <a href="#" className="thumb-sm pull-left m-r">
-                            <img src={this.props.picture} className="img-circle"/>
+                          <a href="#" className="thumb-sm pull-left m-r" style={{width:"10%"}}>
+                            <img src={this.props.picture} className="img-circle" />
                           </a>
                           <div className="clear text-justify">
                             <a href="#" className="text-info">{this.props.name}</a>
@@ -56,7 +59,7 @@ class AlbumPageDetails extends Component {
                       </div>
                     </div>
                     <div className="m-t">
-                      <p className="text-justify" ><strong>{this.props.albumtitle}</strong> is the debut extended play by South Korean singer Taeyeon, released on October 7, 2015 by S.M. Entertainment. The EP was recorded at S.M. Studios in Seoul, South Korea and was produced by Lee Soo-man.</p>
+                      <p className="text-justify" ><strong>{this.props.albumtitle}</strong> {this.props.description}</p>
                     </div>
                     <h4 className="m-t-lg m-b text-left">Track List</h4>
                     <ul className="list-group list-group-lg">

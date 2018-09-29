@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Nav, Navbar, NavItem, NavDropdown, FormControl, FormGroup,  NavbarBrand, MenuItem} from 'react-bootstrap'
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {onLogout} from '../actions'
 import '../css/simple-line-icons.css'
@@ -22,7 +22,7 @@ class Header extends Component{
           <Navbar.Collapse>
             <Nav>
               <NavItem eventKey={1} href="#">
-                <Link to="/AlbumPage">Test AlbumPage</Link>
+                <Link to="/Admin?table=albums">Test Admin</Link>
               </NavItem>
               <NavItem eventKey={2} href="#">
                 Link
@@ -58,7 +58,7 @@ class Header extends Component{
         <Navbar.Collapse>
           <Nav>
             <NavItem eventKey={1} href="#">
-              <Link to="/AlbumPage">Test AlbumPage</Link>
+              <Link to="/Admin?table=albums">Test Admin</Link>
             </NavItem>
             <NavItem eventKey={2} href="#">
               Link

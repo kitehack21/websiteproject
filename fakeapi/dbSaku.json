@@ -12,7 +12,7 @@
       "id": 1,
       "artistname": "Taeyeon (태연)",
       "artistpicture": "https://img.kpopmap.com/2018/02/taeyeon1.jpg",
-      "debut" : "2018/08/02",
+      "debut" : "2008/08/02",
       "birthday" : "1989.03.09",
       "agency" : "SM Entertainment",
       "albums": [
@@ -57,7 +57,7 @@
             {
               "id" : 6,
               "title": "Something New (Instrumental)",
-              "runtime" : "03:0",
+              "runtime" : "02:59",
               "status" : ""
             }
           ]

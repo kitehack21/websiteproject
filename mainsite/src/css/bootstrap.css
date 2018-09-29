@@ -181,6 +181,7 @@ optgroup {
 }
 table {
   border-spacing: 0;
+  
   border-collapse: collapse;
 }
 td,
@@ -6768,5 +6769,8 @@ button.close {
 }
 .pad-left{
   padding-left: 10px
+}
+.table-border td, th{
+  border: 1px solid rgb(231, 231, 231);
 }
 
