@@ -1,6 +1,7 @@
 const express = require('express');
 var bodyParser = require('body-parser');
 const mysql = require('mysql');
+const crypto = require('crypto')
 
 var app = express();
 const port = 1994;
@@ -36,12 +37,29 @@ app.get('/newreleases', function(req,res){
 })
 
 app.get('/artists/:id', function(req,res){
-    console.log(req.query)
     var sql = 'SELECT * FROM artists where id=' + req.params.id
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
         res.send(results);
+    })
+})
+
+app.get('/artistinfo/:id', function(req,res){
+    var sql = `SELECT * FROM artists WHERE id=${req.params.id}`
+    var sql1 = `SELECT * FROM albums WHERE artist_id=${req.params.id}`
+    var sql2 = `SELECT tr.id as track_id, album_id, tr.artist_id as artist_id, number, tr.name as track_name, playtime, 
+                ranking, al.album_name as album_name, release_date, title_track FROM tracks tr LEFT JOIN albums al
+                ON al.id = tr.album_id WHERE tr.artist_id=1 ORDER BY release_date DESC`
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        conn.query(sql1, (err,results1)=>{
+            if(err) throw err;
+            conn.query(sql2,(err,results2)=>{
+                if(err) throw err;
+                res.send({artist: results, albums: results1, tracks:results2});
+            })
+        })
     })
 })
 
@@ -200,6 +218,47 @@ app.delete('/admin/:table/:id', function(req,res){
     })
 })
 
+var secret = "미야와키사쿠라宮脇"
+
+app.get('/users', function(req,res){
+    const cipher = crypto.createHmac("sha256", secret)
+    .update(req.query.password)
+    .digest("hex");
+
+    sql = `SELECT id, username, email FROM users WHERE email = "${req.query.email}" AND password = "${cipher}"`
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+})
+
+app.get('/keeplogin', function(req,res){
+    sql = `SELECT id, username, email FROM users WHERE email = "${req.query.email}"`
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+})
+
+app.post('/users', function(req,res){
+    const cipher = crypto.createHmac("sha256", secret)
+    .update(req.body.password)
+    .digest("hex");
+
+    var data = {
+        username : req.body.username,
+        email : req.body.email,
+        password : cipher
+    }
+
+    sql = `INSERT INTO users SET ?`
+    conn.query(sql, data, (err,results)=>{
+        if(err) throw err;
+        res.send({username: req.body.username, email: req.body.email})
+    })
+})
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

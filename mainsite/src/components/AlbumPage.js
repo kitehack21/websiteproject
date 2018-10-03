@@ -42,7 +42,8 @@ class AlbumPage extends Component{
             genre = {this.state.album.release_date}
             publisher = {this.state.album.release_date}
             description = {this.state.album.description}
-            tracks = {this.state.tracks}/>)
+            tracks = {this.state.tracks}
+            artist_id = {this.state.artist.id}/>)
     }
     
     render(){

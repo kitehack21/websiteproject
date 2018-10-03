@@ -1,20 +1,40 @@
 import React, {Component} from 'react'
 import {Nav, NavItem, Tab, Row, Col} from 'react-bootstrap'
 import axios from 'axios'
-import AlbumList from './AlbumList'
-import testimage from '../images/ty-i.jpg'
+import AlbumCard from './AlbumCard'
+import Tracklist from './Tracklist'
 import {API_URL_1} from '../supports/api-url/apiurl'
 
 class ArtistPage extends Component{
-    state = {artist: []}
+    state = {artist: [], albums:[] , tracks: []}
 
     componentWillMount(){
-        axios.get(API_URL_1 + '/artists/' + 1)
+        var params = new URLSearchParams(this.props.location.search);
+        var id_select = params.get('artist')
+        axios.get(API_URL_1 + '/artistinfo/' + id_select)
         .then(response => {
-            console.log(response);
-            this.setState({artist: response.data});
-        });
+            console.log(response.data);
+            this.setState({artist: response.data.artist[0], albums: response.data.albums, tracks: response.data.tracks});
+        })
+        .catch((err) =>{
+            console.log(err)
+        })
     }
+
+    renderAlbumList = () =>{
+        console.log(this.state.albums)
+        return this.state.albums.map(albums =>
+        <AlbumCard key = {albums.id} album_id = {albums.id} title = {albums.album_name} 
+        image={albums.album_art} artist = {this.state.artist.name} artist_id={albums.artist_id}/>
+        ) 
+    }
+
+    renderTracklist(){
+        return (this.state.tracks.map(songs =>
+          <Tracklist key={songs.id} id={songs.id} title={songs.track_name} playtime={songs.playtime} 
+          title_track={songs.title_track} number = {songs.number}/>
+        ))
+      }
 
 
     render(){
@@ -25,9 +45,9 @@ class ArtistPage extends Component{
                         <div className="clearfix text-center m-t">
                             <div className="inline">
                                 <div className="thumb-lg">
-                                    <img src={this.state.artist.artistpicture} className="img-circle" alt="..."/>
+                                    <img src={this.state.artist.picture} className="img-circle" alt="..."/>
                                 </div>
-                                <div className="h4 m-t m-b-xs">{this.state.artist.artistname}</div>
+                                <div className="h4 m-t m-b-xs">{this.state.artist.name}</div>
                                 <small className="text-muted m-b">Musical Artist</small>
                             </div>                      
                         </div>
@@ -45,19 +65,18 @@ class ArtistPage extends Component{
                         <Row>
                         <Tab.Content animation>
                             <Tab.Pane eventKey="home">
+                            <Col md={12} mdPush={2}>
                                 HOME
-                                <br/>
-                                <br/>
-                                <br/>
-                                <br/>
-                                <br/>
-                                <br/>
+                            </Col>
                             </Tab.Pane>
                             <Tab.Pane eventKey="songs">
+                            <Col xs={8} md={8} xsPush={2} mdPush={2}>
+                                {this.renderTracklist()}
+                            </Col>
                             </Tab.Pane>
                             <Tab.Pane eventKey="albums">
-                            <Col md={12} mdPush={2}>
-                                <AlbumList />
+                            <Col xs={8} md={8} xsPush={2} mdPush={2}>
+                                {this.renderAlbumList()}
                             </Col>
                                 
                             </Tab.Pane>

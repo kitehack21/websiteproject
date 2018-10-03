@@ -34,9 +34,9 @@ class Header extends Component{
             <Nav pullRight>
               <Navbar.Form pullLeft>
                 <FormGroup>
-                  <FormControl className="form-control input-sm no-border rounded" type="text" placeholder="Artist, Songs , Albums..." />
+                  <FormControl className="form-control input-s-lg no-border rounded col-xs-10" style={{"max-length":"200px"}} type="text" placeholder="Artist, Songs , Albums..." />
+                  <a href="#" class="fa fa-search btn-icon rounded colxs-2" style={{"margin-top":"10px"}}/>
                 </FormGroup>{' '}
-                <a href="#" className="fa fa-search"/>
               </Navbar.Form>
               <NavDropdown eventKey={3} title={this.props.auth.username} id="basic-nav-dropdown">
                 <MenuItem>Account</MenuItem>

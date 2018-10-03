@@ -68,7 +68,24 @@ class TracksDataTable extends Component {
     }
 
     titleTrackStatus(){
-        return(["N", "Y"])
+        return([<strong style={{color:"red"}}>N</strong>, <strong style={{color:"green"}}>Y</strong>])
+    }
+
+    renderTitleTrackSelect(){
+        return (
+            [<div>
+                <select ref="editTitleTrack">
+                    <option value={1}>Y</option>
+                    <option value={0} selected>N</option>
+                </select>
+                </div>,
+            <div>
+                <select ref="editTitleTrack">
+                    <option value={1} selected>Y</option>
+                    <option value={0}>N</option>
+                </select>
+            </div>]
+        )
     }
 
     renderPage(){
@@ -98,9 +115,9 @@ class TracksDataTable extends Component {
                     </select>
                 </td>
                 <td>{this.props.number}</td>
-                <td>{this.props.name}</td>
-                <td>{this.props.playtime}</td>
-                <td>{this.titleTrackStatus()[this.props.title_track]}</td>
+                <td><input type="text" defaultValue={this.props.name}/></td>
+                <td><input type="text" defaultValue={this.props.playtime}/></td>
+                <td>{this.renderTitleTrackSelect()[this.props.title_track]}</td>
                 <td>{this.props.ranking}</td>
                 <td>
                     <input type="button" className="btn btn-primary" style={{width: 70}} onClick={()=>this.onSaveClick()} value="Save"/>

@@ -15,6 +15,7 @@ class AlbumPageDetails extends Component {
   }
   
     render(){
+      var artistURL = "/ArtistPage?artist=" + this.props.artist_id
         return(
             <section className="vbox">
             <div className="row">
@@ -31,7 +32,7 @@ class AlbumPageDetails extends Component {
                             <img src={this.props.picture} className="img-circle" />
                           </a>
                           <div className="clear text-justify">
-                            <a href="#" className="text-info">{this.props.name}</a>
+                            <Link to = {artistURL} className="text-info">{this.props.name}</Link>
                             <small className="block text-muted">12,500,000 followers / 30 following</small>
                           </div>
                         </div>

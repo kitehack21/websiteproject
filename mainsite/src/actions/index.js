@@ -52,7 +52,7 @@ export const onRegister = (user) =>{
 
 export const keepLogin = (email) =>{
     return(dispatch) => {
-        axios.get(API_URL_1 + "/users", {
+        axios.get(API_URL_1 + "/keeplogin", {
             params: {
                 email: email,
             }

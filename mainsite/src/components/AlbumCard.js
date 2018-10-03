@@ -1,23 +1,33 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {OverlayTrigger, Tooltip} from 'react-bootstrap'
 
 class AlbumCard extends Component {
     render(){
+        const tooltip = (
+            <Tooltip id="tooltip" arrowOffsetLeft>
+              <strong>{this.props.title}</strong>
+            </Tooltip>
+          );
         var albumURL = "/AlbumPage?album=" + this.props.album_id + "&artist=" + this.props.artist_id
+        var artistURL = "/ArtistPage?artist=" + this.props.artist_id
         return(
         <div className="col-xs-6 col-sm-3">
             <div className="item">
-            <div className="pos-rlt">
+            <Link to = {albumURL}><div className="pos-rlt">
                 <div className="item-overlay opacity r r-2x bg-black">
                 <div className="center text-center m-t-n">
-                    <a href="#"><i className="fa fa-play-circle i-2x"></i></a>
+                <Link to = {albumURL}><i className="fa fa-play-circle i-2x"></i></Link>
                 </div>
                 </div>
-                <a href="#"><img src={this.props.image} alt="" className="r r-2x img-full"/></a>
+                <a><img src={this.props.image} alt="" className="r r-2x img-full"/></a>
             </div>
+            </Link>
             <div className="padder-v">
+                <OverlayTrigger placement="top" overlay={tooltip} >
                 <Link to = {albumURL} className="text-ellipsis">{this.props.title}</Link>
-                <Link to = "ArtistPage" className="text-ellipsis text-xs text-muted">{this.props.artist}</Link>
+                </OverlayTrigger>
+                <Link to = {artistURL} className="text-ellipsis text-xs text-muted">{this.props.artist}</Link>
             </div>
             </div>
         </div>

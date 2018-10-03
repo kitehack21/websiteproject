@@ -3,9 +3,19 @@ import {Redirect} from 'react-router-dom'
 import {Button} from 'react-bootstrap'
 import {connect} from 'react-redux';
 import {onRegister} from '../actions'
+import Cookies from 'universal-cookie'
 
+const cookies = new Cookies();
 
 class RegisterPage extends Component {
+
+    componentWillReceiveProps(newProps){
+        if(newProps.auth.username !== ""){
+                        //cookie name
+            cookies.set('myCookie', newProps.auth.email, {path: "/"})
+        }
+    }
+
     onRegisterClick = () => {
         this.props.onRegister({
             username: this.refs.username.value,
