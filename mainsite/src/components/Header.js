@@ -22,7 +22,7 @@ class Header extends Component{
           <Navbar.Collapse>
             <Nav>
               <NavItem eventKey={1} href="#">
-                <Link to="/Admin?table=albums">Test Admin</Link>
+                <Link to="/Admin/albums">Test Admin</Link>
               </NavItem>
               <NavItem eventKey={2} href="#">
                 Link
@@ -58,7 +58,7 @@ class Header extends Component{
         <Navbar.Collapse>
           <Nav>
             <NavItem eventKey={1} href="#">
-              <Link to="/Admin?table=albums">Test Admin</Link>
+              <Link to="/Admin/albums">Test Admin</Link>
             </NavItem>
             <NavItem eventKey={2} href="#">
               Link
@@ -69,10 +69,10 @@ class Header extends Component{
           </Nav>
           <Nav pullRight>
             <NavItem eventKey={2} href="#">
-              <Link to="SignIn"> Sign In</Link>
+              <Link to="/SignIn"> Sign In</Link>
             </NavItem>
             <NavItem eventKey={2} href="#">
-              <Link to="RegisterPage">Register</Link>
+              <Link to="/RegisterPage">Register</Link>
             </NavItem>
           </Nav>
         </Navbar.Collapse>

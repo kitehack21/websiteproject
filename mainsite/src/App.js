@@ -9,6 +9,7 @@ import SignIn from './components/SignIn'
 import RegisterPage from './components/RegisterPage'
 import AlbumPage from './components/AlbumPage'
 import Admin from './components/Admin'
+import AccountPage from './components/AccountPage'
 import {connect} from 'react-redux'
 import Cookies from 'universal-cookie'
 import {keepLogin, cookieChecked} from './actions'
@@ -53,7 +54,8 @@ class App extends Component {
             <Route path="/ArtistPage" component = {ArtistPage}/>
             <Route path="/RegisterPage" component = {RegisterPage}/>
             <Route path="/AlbumPage" component = {AlbumPage}/>
-            <Route path="/Admin" component = {Admin}/>
+            <Route path="/Admin/:table" component = {Admin}/>
+            <Route path="/account" component = {AccountPage}/>
           </div>  
           {/* <Footer />       */}
         </div>

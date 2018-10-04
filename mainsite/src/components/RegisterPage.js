@@ -28,6 +28,19 @@ class RegisterPage extends Component {
     onSignInClick = () =>{
         this.props.history.push("/SignIn")
     }
+
+    errorRender(){
+        if(this.props.auth.error != ""){
+          return (
+            <div>
+              <br/>
+              <div id="content" className="alert alert-danger rounded alert-block animated fadeInUp">
+                {this.props.auth.error}
+              </div>
+            </div>
+          )
+        }
+      }
  
     render(){
         if(this.props.auth.username == ""){
@@ -55,6 +68,7 @@ class RegisterPage extends Component {
                             </label>
                         </div>
                         <Button onClick={this.onRegisterClick} className="btn btn-lg btn-primary lt b-white b-2x btn-block btn-rounded"><i className="icon-arrow-right pull-right"></i><span className="m-r-n-lg">Register</span></Button>
+                        {this.errorRender()}
                         <div className="line line-dashed"></div>
                         <p className="text-muted text-center"><small>Already have an account?</small></p>
                         <a className="btn btn-lg btn-info btn-block btn-rounded" onClick={()=>{this.onSignInClick()}}>Sign in</a>

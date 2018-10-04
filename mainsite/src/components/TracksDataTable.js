@@ -13,13 +13,12 @@ class TracksDataTable extends Component {
     }
 
     onSaveClick(){
-        axios.put(API_URL_1 + "/admin/" + this.props.table + "/" + this.props.album_id,
+        axios.put(API_URL_1 + "/admin/" + this.props.table + "/" + this.props.id,
             {
                 artist_id: this.refs.editArtist.value,
-                album_name: this.refs.editAlbum.value,
-                release_date: this.refs.editReleaseDate.value,
-                album_art: this.refs.editAlbumArt.value,
-                description: this.refs.editDescription.value
+                name: this.refs.editName.value,
+                playtime: this.refs.editPlaytime.value,
+                title_track: this.refs.editTitleTrack.value,
             }
         )
         .then((res)=>{
@@ -115,8 +114,8 @@ class TracksDataTable extends Component {
                     </select>
                 </td>
                 <td>{this.props.number}</td>
-                <td><input type="text" defaultValue={this.props.name}/></td>
-                <td><input type="text" defaultValue={this.props.playtime}/></td>
+                <td><input type="text" ref="editName" defaultValue={this.props.name}/></td>
+                <td><input type="text" ref="editPlaytime"defaultValue={this.props.playtime}/></td>
                 <td>{this.renderTitleTrackSelect()[this.props.title_track]}</td>
                 <td>{this.props.ranking}</td>
                 <td>

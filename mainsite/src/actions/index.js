@@ -39,10 +39,17 @@ export const onRegister = (user) =>{
         axios.post(API_URL_1 + "/users", user)
         .then((res) => {
             console.log(res)
-            dispatch ({
-                type: "USER_LOGIN_SUCCESS",
-                payload: {username: res.data.username, email: res.data.email, error:""}
-            })
+            if(res.data.error === 1){
+                dispatch({
+                    type: "USER_REGISTER_FAIL"
+                })
+            }
+            else{
+                dispatch ({
+                    type: "USER_LOGIN_SUCCESS",
+                    payload: {username: res.data.username, email: res.data.email, error:""}
+                })
+            }
         })
         .catch((err) => {
             console.log(err);

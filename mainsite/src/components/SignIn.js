@@ -23,6 +23,10 @@ class SignIn extends Component {
       this.props.onLogin({email, password});
     }
 
+    onRegisterClick = () =>{
+      this.props.history.push("/RegisterPage")
+    }
+
     errorRender(){
       if(this.props.auth.error != ""){
         return (
@@ -59,7 +63,7 @@ class SignIn extends Component {
               <div className="text-center m-t m-b"><a href="#"><small>Forgot password?</small></a></div>
               <div className="line line-dashed"></div>
               <p className="text-muted text-center"><small>Do not have an account?</small></p>
-              <a  className="btn btn-lg btn-info btn-block rounded">Create an account</a>
+              <a  className="btn btn-lg btn-info btn-block rounded"  onClick={()=>{this.onRegisterClick()}}>Create an account</a>
             </form>
           </section>
         </div>

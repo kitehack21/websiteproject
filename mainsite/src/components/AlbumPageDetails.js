@@ -28,9 +28,9 @@ class AlbumPageDetails extends Component {
                       <div className="col-sm-8">
                         <h2 className="m-t-none text-black text-justify">{this.props.albumtitle}</h2>
                         <div className="clearfix m-b-lg">
-                          <a href="#" className="thumb-sm pull-left m-r" style={{width:"10%"}}>
+                          <Link to = {artistURL} className="thumb-sm pull-left m-r" style={{width:"10%"}}>
                             <img src={this.props.picture} className="img-circle" />
-                          </a>
+                          </Link>
                           <div className="clear text-justify">
                             <Link to = {artistURL} className="text-info">{this.props.name}</Link>
                             <small className="block text-muted">12,500,000 followers / 30 following</small>

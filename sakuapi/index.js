@@ -122,21 +122,20 @@ app.put('/admin/:table/:id', function(req,res){
             {
             albums: ()=> {
                 return(
-                    sql = `UPDATE albums SET ? WHERE id=${req.params.id}` )
+                    sql = `UPDATE albums SET ? WHERE id=${req.params.id}`)
                 },
             artists: ()=>{
                 return(
-                    sql = `SELECT * from artists ` )
+                    sql = `UPDATE artists SET ? WHERE id=${req.params.id}`)
                 },
             genres: ()=>{
                 return(
-                    sql = `SELECT * from genres ` )
+                    sql = `UPDATE genres SET ? WHERE id=${req.params.id}`)
                 },
             tracks: ()=>{
-                    return(
-                        sql = `SELECT al.album_name, ar.name as artist_name, tr.id, tr.number, tr.name, playtime, title_track, ranking 
-                         FROM tracks tr JOIN albums al ON tr.album_id = al.id JOIN artists ar ON tr.artist_id = ar.id ` )
-                    },
+                return(
+                    sql = `UPDATE tracks SET ? WHERE id=${req.params.id}`)
+                },
             }
         )
     }
@@ -148,14 +147,8 @@ app.put('/admin/:table/:id', function(req,res){
     })
 })
 
-app.post('/admin', function(req,res){
-    var data = {
-        artist_id: req.body.artist_id,
-        album_name: req.body.album_name,
-        release_date: req.body.release_date,
-        album_art: req.body.album_art,
-        description: req.body.description
-    }
+app.post('/admin/:table', function(req,res){
+    var data = req.body
     function tableselect(){
         return(
             {
@@ -165,22 +158,21 @@ app.post('/admin', function(req,res){
                 },
             artists: ()=>{
                 return(
-                    sql = `SELECT * from artists ` )
+                    sql = `INSERT INTO artists SET ?` )
                 },
             genres: ()=>{
                 return(
-                    sql = `SELECT * from genres ` )
+                    sql = `INSERT INTO genres SET ?` )
                 },
             tracks: ()=>{
-                    return(
-                        sql = `SELECT al.album_name, ar.name as artist_name, tr.id, tr.number, tr.name, playtime, title_track, ranking 
-                         FROM tracks tr JOIN albums al ON tr.album_id = al.id JOIN artists ar ON tr.artist_id = ar.id ` )
-                    },
+                return(
+                    sql = `INSERT INTO tracks SET ?` )
+                },
             }
         )
     }
 
-    conn.query(tableselect()[req.body.table](), data, (err,results)=>{
+    conn.query(tableselect()[req.params.table](), data, (err,results)=>{
         if(err) throw err;
         res.send(results)
         console.log(results)
@@ -236,7 +228,7 @@ app.get('/users', function(req,res){
 app.get('/keeplogin', function(req,res){
     sql = `SELECT id, username, email FROM users WHERE email = "${req.query.email}"`
     conn.query(sql, (err,results)=>{
-        if(err) throw err;
+
         console.log(results)
         res.send(results)
     })
@@ -253,12 +245,26 @@ app.post('/users', function(req,res){
         password : cipher
     }
 
-    sql = `INSERT INTO users SET ?`
-    conn.query(sql, data, (err,results)=>{
-        if(err) throw err;
-        res.send({username: req.body.username, email: req.body.email})
+    sql = `SELECT * FROM users WHERE username = '${data.username}' OR email = '${data.email}'`
+    sql1 = `INSERT INTO users SET ?`
+    conn.query(sql, (err,results)=>{
+        console.log(results.length)
+        if(results.length == 0){
+            conn.query(sql1, data, (err1,results1)=>{
+                if(err1) throw err1;
+                console.log(results1)
+                res.send({username: req.body.username, email: req.body.email, error:0})
+            })
+        }
+        else{
+            res.send({error:1})
+        }
     })
 })
+
+// app.post('/upload', function(req, res) {
+//     if(req)
+// })
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

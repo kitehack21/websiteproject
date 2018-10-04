@@ -13,14 +13,13 @@ class ArtistsDataTable extends Component {
     }
 
     onSaveClick(){
-        axios.put(API_URL_1 + "/admin/" + this.props.album_id,
+        axios.put(API_URL_1 + "/admin/" + this.props.table + "/" + this.props.id,
             {
-                artist_id: this.refs.editArtist.value,
-                album_name: this.refs.editAlbum.value,
-                release_date: this.refs.editReleaseDate.value,
-                album_art: this.refs.editAlbumArt.value,
-                description: this.refs.editDescription.value,
-                table: this.props.table
+                name: this.refs.editName.value,
+                debut: this.refs.editDebut.value,
+                birthday: this.refs.editBirthday.value,
+                agency: this.refs.editAgency.value,
+                picture: this.refs.editPicture.value
             }
         )
         .then((res)=>{
@@ -60,7 +59,7 @@ class ArtistsDataTable extends Component {
                 <td>{this.props.debut}</td>
                 <td>{this.props.birthday}</td>
                 <td>{this.props.agency}</td>
-                <td><img src={this.props.picture} style={{width:"100%"}}/></td>
+                <td><img src={this.props.picture} style={{width:"100%"}} alt={this.props.picture}/></td>
                 <td>
                     <input type="button" className="btn btn-success" style={{width: 70}} onClick={()=>this.onEditClick()} value="Edit"/>
                     <br/>
@@ -69,11 +68,11 @@ class ArtistsDataTable extends Component {
                 </tr>,
                 <tr className="table-border">
                 <td>{this.props.id}</td>
-                <td><input type="text" defaultValue={this.props.name}/></td>
-                <td><input type="text" defaultValue={this.props.debut}/></td>
-                <td><input type="text" defaultValue={this.props.birthday}/></td>
-                <td><input type="text" defaultValue={this.props.agency}/></td>
-                <td><input type="text" defaultValue={this.props.picture}/></td>
+                <td><input type="text" ref="editName" defaultValue={this.props.name}/></td>
+                <td><input type="text" ref="editDebut" defaultValue={this.props.debut}/></td>
+                <td><input type="text" ref="editBirthday" defaultValue={this.props.birthday}/></td>
+                <td><input type="text" ref="editAgency" defaultValue={this.props.agency}/></td>
+                <td><input type="text" ref="editPicture" defaultValue={this.props.picture}/></td>
                 <td>
                     <input type="button" className="btn btn-primary" style={{width: 70}} onClick={()=>this.onSaveClick()} value="Save"/>
                     <br/>

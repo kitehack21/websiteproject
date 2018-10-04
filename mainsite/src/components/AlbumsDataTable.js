@@ -75,7 +75,7 @@ class AlbumsDataTable extends Component {
                 <td>{this.props.artist_name }</td>
                 <td>{this.props.album_name}</td>
                 <td>{this.props.release_date}</td>
-                <td><img src={this.props.album_art} style={{width:"100%"}}/></td>
+                <td><img src={this.props.album_art} style={{width:"100%"}} alt={this.props.album_art}/></td>
                 <td>{this.props.description}</td>
                 <td>
                     <input type="button" className="btn btn-success" style={{width: 70}} onClick={()=>this.onEditClick()} value="Edit"/>
