@@ -40,7 +40,6 @@ class SignIn extends Component {
       }
     }
     render() {
-      console.log(this.props.users);
       console.log(this.props.auth)
       if(this.props.auth.username == ""){
         return (
@@ -58,7 +57,7 @@ class SignIn extends Component {
               <div className="form-group">
                  <input type="password" ref="password" placeholder="Password" className="form-control rounded input-lg text-center no-border"/>
               </div>
-              <Button onClick={this.onLoginClick} className="btn btn-lg btn-primary lt b-white b-2x btn-block btn-rounded"><i className="icon-arrow-right pull-right"></i><span className="m-r-n-lg">Sign in</span></Button>
+              <Button onClick={()=>this.onLoginClick()} className="btn btn-lg btn-primary lt b-white b-2x btn-block btn-rounded"><i className="icon-arrow-right pull-right"></i><span className="m-r-n-lg">Sign in</span></Button>
               {this.errorRender()}
               <div className="text-center m-t m-b"><a href="#"><small>Forgot password?</small></a></div>
               <div className="line line-dashed"></div>

@@ -1,5 +1,5 @@
 const INITIAL_STATE = 
-    {username: "", email: "", error:"", cookieCheck: false}
+    {username: "", email: "", error:"", id: "", subscription: "inactive", cookieCheck: false}
 ;
 
 //INITIAL_STATE => default parameter

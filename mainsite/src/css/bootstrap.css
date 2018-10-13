@@ -2508,7 +2508,7 @@ legend {
 }
 label {
   display: inline-block;
-  max-width: 100%;
+  max-width: 100;
   margin-bottom: 5px;
   font-weight: bold;
 }
@@ -6772,5 +6772,11 @@ button.close {
 }
 .table-border td, th{
   border: 1px solid rgb(231, 231, 231);
+}
+.image-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 

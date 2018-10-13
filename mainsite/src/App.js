@@ -10,6 +10,8 @@ import RegisterPage from './components/RegisterPage'
 import AlbumPage from './components/AlbumPage'
 import Admin from './components/Admin'
 import AccountPage from './components/AccountPage'
+import BrowsePage from './components/BrowsePage'
+import Subscriptions from './components/Subscriptions'
 import {connect} from 'react-redux'
 import Cookies from 'universal-cookie'
 import {keepLogin, cookieChecked} from './actions'
@@ -55,7 +57,9 @@ class App extends Component {
             <Route path="/RegisterPage" component = {RegisterPage}/>
             <Route path="/AlbumPage" component = {AlbumPage}/>
             <Route path="/Admin/:table" component = {Admin}/>
+            <Route path="/browse" component = {BrowsePage}/>
             <Route path="/account" component = {AccountPage}/>
+            <Route path="/subscriptions" component = {Subscriptions}/>
           </div>  
           {/* <Footer />       */}
         </div>

@@ -34,9 +34,9 @@ class AlbumList extends Component {
             <div>
                 <div className="col-md-8 col-xs-12">
                     <h3 className="font-thin" align="left">New Releases</h3>
-                <section id="content">
-                    {this.renderAlbumList()}
-                </section>
+                    <section id="content">
+                        {this.renderAlbumList()}
+                    </section>
                 </div>
             </div>
         );

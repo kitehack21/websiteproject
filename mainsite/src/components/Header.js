@@ -25,7 +25,7 @@ class Header extends Component{
                 <Link to="/Admin/albums">Test Admin</Link>
               </NavItem>
               <NavItem eventKey={2} href="#">
-                Link
+                <Link to="/browse">Browse</Link>
               </NavItem>
               <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
                 <NavItem>Hello</NavItem>
@@ -61,7 +61,7 @@ class Header extends Component{
               <Link to="/Admin/albums">Test Admin</Link>
             </NavItem>
             <NavItem eventKey={2} href="#">
-              Link
+            <Link to="/browse">Browse</Link>
             </NavItem>
             <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
               <NavItem>Hello</NavItem>

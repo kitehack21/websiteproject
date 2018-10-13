@@ -1,10 +1,12 @@
 import React, {Component} from 'react'
+import AccountTabs from './AccountTabs'
 
 class AccountPage extends Component{
 
     componentWillMount(){
 
     }
+    
     render(){
         return(
             <section id="content">
@@ -70,135 +72,7 @@ class AccountPage extends Component{
                       </section>
                     </section>
                   </aside>
-                  <aside className="bg-white">
-                    <section className="vbox">
-                      <header className="header bg-light lt">
-                        <ul className="nav nav-tabs nav-white">
-                          <li className="active"><a href="#activity" data-toggle="tab">Activity</a></li>
-                          <li className=""><a href="#events" data-toggle="tab">Events</a></li>
-                          <li className=""><a href="#interaction" data-toggle="tab">Interaction</a></li>
-                        </ul>
-                      </header>
-                      <section className="scrollable">
-                        <div className="tab-content">
-                          <div className="tab-pane active" id="activity">
-                            <ul className="list-group no-radius m-b-none m-t-n-xxs list-group-lg no-border">
-                              <li className="list-group-item">
-                                <a href="#" className="thumb-sm pull-left m-r-sm">
-                                  <img src="images/a0.png" className="img-circle"/>
-                                </a>
-                                <a href="#" className="clear">
-                                  <small className="pull-right">3 minuts ago</small>
-                                  <strong className="block">Drew Wllon</strong>
-                                  <small>Wellcome and play this web application template ... </small>
-                                </a>
-                              </li>
-                              <li className="list-group-item">
-                                <a href="#" className="thumb-sm pull-left m-r-sm">
-                                  <img src="images/a1.png" className="img-circle"/>
-                                </a>
-                                <a href="#" className="clear">
-                                  <small className="pull-right">1 hour ago</small>
-                                  <strong className="block">Jonathan George</strong>
-                                  <small>Morbi nec nunc condimentum...</small>
-                                </a>
-                              </li>
-                              <li className="list-group-item">
-                                <a href="#" className="thumb-sm pull-left m-r-sm">
-                                  <img src="images/a2.png" className="img-circle"/>
-                                </a>
-                                <a href="#" className="clear">
-                                  <small className="pull-right">2 hours ago</small>
-                                  <strong className="block">Josh Long</strong>
-                                  <small>Vestibulum ullamcorper sodales nisi nec...</small>
-                                </a>
-                              </li>
-                              <li className="list-group-item">
-                                <a href="#" className="thumb-sm pull-left m-r-sm">
-                                  <img src="images/a3.png" className="img-circle"/>
-                                </a>
-                                <a href="#" className="clear">
-                                  <small className="pull-right">1 day ago</small>
-                                  <strong className="block">Jack Dorsty</strong>
-                                  <small>Morbi nec nunc condimentum...</small>
-                                </a>
-                              </li>
-                              <li className="list-group-item">
-                                <a href="#" className="thumb-sm pull-left m-r-sm">
-                                  <img src="images/a4.png" className="img-circle"/>
-                                </a>
-                                <a href="#" className="clear">
-                                  <small className="pull-right">3 days ago</small>
-                                  <strong className="block">Morgen Kntooh</strong>
-                                  <small>Mobile first web app for startup...</small>
-                                </a>
-                              </li>
-                              <li className="list-group-item">
-                                <a href="#" className="thumb-sm pull-left m-r-sm">
-                                  <img src="images/a5.png" className="img-circle"/>
-                                </a>
-                                <a href="#" className="clear">
-                                  <small className="pull-right">Jun 21</small>
-                                  <strong className="block">Yoha Omish</strong>
-                                  <small>Morbi nec nunc condimentum...</small>
-                                </a>
-                              </li>
-                              <li className="list-group-item">
-                                <a href="#" className="thumb-sm pull-left m-r-sm">
-                                  <img src="images/a6.png" className="img-circle"/>
-                                </a>
-                                <a href="#" className="clear">
-                                  <small className="pull-right">May 10</small>
-                                  <strong className="block">Gole Lido</strong>
-                                  <small>Vestibulum ullamcorper sodales nisi nec...</small>
-                                </a>
-                              </li>
-                              <li className="list-group-item">
-                                <a href="#" className="thumb-sm pull-left m-r-sm">
-                                  <img src="images/a7.png" className="img-circle"/>
-                                </a>
-                                <a href="#" className="clear">
-                                  <small className="pull-right">Jan 2</small>
-                                  <strong className="block">Jonthan Snow</strong>
-                                  <small>Morbi nec nunc condimentum...</small>
-                                </a>
-                              </li>
-                              <li className="list-group-item" href="#email-content" data-toggle="className:show">
-                                <a href="#" className="thumb-sm pull-left m-r-sm">
-                                  <img src="images/a8.png" className="img-circle"/>
-                                </a>
-                                <a href="#" className="clear">
-                                  <small className="pull-right">3 minuts ago</small>
-                                  <strong className="block">Drew Wllon</strong>
-                                  <small>Vestibulum ullamcorper sodales nisi nec sodales nisi nec sodales nisi nec...</small>
-                                </a>
-                              </li>
-                              <li className="list-group-item">
-                                <a href="#" className="thumb-sm pull-left m-r-sm">
-                                  <img src="images/a9.png" className="img-circle"/>
-                                </a>
-                                <a href="#" className="clear">
-                                  <small className="pull-right">1 hour ago</small>
-                                  <strong className="block">Jonathan George</strong>
-                                  <small>Morbi nec nunc condimentum...</small>
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="tab-pane" id="events">
-                            <div className="text-center wrapper">
-                              <i className="fa fa-spinner fa fa-spin fa fa-large"></i>
-                            </div>
-                          </div>
-                          <div className="tab-pane" id="interaction">
-                            <div className="text-center wrapper">
-                              <i className="fa fa-spinner fa fa-spin fa fa-large"></i>
-                            </div>
-                          </div>
-                        </div>
-                      </section>
-                    </section>
-                  </aside>
+                 <AccountTabs/>
                   <aside className="col-lg-3 b-l">
                     <section className="vbox">
                       <section className="scrollable padder-v">

@@ -8,11 +8,11 @@ export const onLogin = (user) =>{
                 email: user.email,
                 password: user.password
             }
-        }).then(user => {
-            console.log(user)
+        }).then(res => {
+            console.log(res)
                 dispatch ({
                     type: "USER_LOGIN_SUCCESS",
-                    payload: {username: user.data[0].username, email: user.data[0].email, error: ""}
+                    payload: {username: res.data.user.username, email: res.data.user.email, id: res.data.user.id, subscription: res.data.subscription.status, error: ""}
                 })
         }).catch(err => {
             console.log(err);
@@ -47,7 +47,7 @@ export const onRegister = (user) =>{
             else{
                 dispatch ({
                     type: "USER_LOGIN_SUCCESS",
-                    payload: {username: res.data.username, email: res.data.email, error:""}
+                    payload: {username: res.data.username, email: res.data.email, id: res.data.id, subscription:"inactive", error:""}
                 })
             }
         })
@@ -63,11 +63,11 @@ export const keepLogin = (email) =>{
             params: {
                 email: email,
             }
-        }).then(user => {
-            console.log(user)
+        }).then(res => {
+            console.log(res)
                 dispatch ({
                     type: "USER_LOGIN_SUCCESS",
-                    payload: {username: user.data[0].username, email: user.data[0].email, error: ""}
+                    payload: {username: res.data.user.username, email: res.data.user.email, id: res.data.user.id, subscription: res.data.subscription.status, error: ""}
                 })
                 dispatch({
                     type: "COOKIES_CHECKED"

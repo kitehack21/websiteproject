@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Grid, Row, Col} from 'react-bootstrap';
-import albumData from '../assets/albumList.json'
+import {API_URL_1} from '../supports/api-url/apiurl'
+import axios from 'axios'
 import TopSongs from './TopSongs'
 
 
@@ -8,12 +8,21 @@ class TopList extends Component {
     state = { albums: []}
     
     componentWillMount(){
-        this.setState({albums: albumData})
+        axios.get(API_URL_1 + "/topsongs")
+        .then((response)=>{
+            console.log(response.data)
+            this.setState({albums : response.data.albums})
+        })
+        .catch((err)=>{
+            console.log(err)
+            alert("ERROR")
+        })
     }
+
     renderTopSongs = () =>{
         console.log(this.state)
-        return this.state.albums.map(albums =>
-        <TopSongs key = {albums.Title} title = {albums.Title} image={albums.Art} artist = {albums.Artist}/>
+        return this.state.albums.map(songs =>
+        <TopSongs key = {songs.id} track_name = {songs.track_name} ranking={songs.ranking} album_name={songs.album_name} album_art={songs.album_art} artist_name = {songs.artist_name}/>
         )   
     }
     top5(arr){

@@ -9,7 +9,7 @@ import "../css/datatables.css"
 
 class Admin extends Component{
 
-    state= {data: [], listTables: [], listArtists: []}
+    state= {data: [], listTables: [], listArtists: [], listAlbums: []}
  
 
     componentWillMount(){
@@ -24,7 +24,7 @@ class Admin extends Component{
         })
         .then((response)=>{
             console.log(response.data)
-            this.setState({listArtists: response.data.listArtists, data: response.data.table })
+            this.setState({listArtists: response.data.listArtists, listAlbums: response.data.listAlbums, data: response.data.table })
         })
     }
     
@@ -55,6 +55,10 @@ class Admin extends Component{
             .then((res)=>{
                 console.log(res)
                 alert("SUCCESS")
+                this.refs.addAlbum.value = ""
+                this.refs.addReleaseDate.value = ""
+                this.refs.addAlbumArt.value = ""
+                this.refs.addDescription.value = ""
                 this.refreshData()
             })
             .catch((err)=>{
@@ -273,21 +277,21 @@ class Admin extends Component{
                 albums: () => {
                     return (
                     <table className="table table-striped m-b-none">
-                    <tr className="table-border">
-                        <td>
-                            <select ref="addArtist" id="addArtist">
-                            <option value={0} className="text-muted">---Select Artist---</option>
-                            {this.renderArtistSelect()}
-                            </select>
-                        </td>
-                        <td><input type="text" id="addAlbum" ref="addAlbum" placeholder="Enter Album Name" style={{width: 220}}/></td>
-                        <td><input type="text" id="addReleaseDate" ref="addReleaseDate" placeholder="Enter release date" style={{width: 120}}/></td>
-                        <td><input type="text" id="addAlbumArt" ref="addAlbumArt" placeholder="Enter picture link" /></td>
-                        <td><textarea id="addDescription" ref="addDescription" placeholder="Enter album description" style={{resize:"none"}} rows= '4' cols= '80'/></td>
-                        <td>
-                            <input type="button" className="btn btn-info" style={{width: 70}} onClick={()=>this.onEnterClickAlbums()} value="Enter"/>
-                        </td>
-                    </tr>
+                        <tr className="table-border">
+                            <td>
+                                <select ref="addArtist" id="addArtist">
+                                <option value={0} className="text-muted">---Select Artist---</option>
+                                {this.renderArtistSelect()}
+                                </select>
+                            </td>
+                            <td><input type="text" id="addAlbum" ref="addAlbum" placeholder="Enter Album Name" style={{width: 220}}/></td>
+                            <td><input type="text" id="addReleaseDate" ref="addReleaseDate" placeholder="Enter release date" style={{width: 120}}/></td>
+                            <td><input type="text" id="addAlbumArt" ref="addAlbumArt" placeholder="Enter picture link" /></td>
+                            <td><textarea id="addDescription" ref="addDescription" placeholder="Enter album description" style={{resize:"none"}} rows= '4' cols= '80'/></td>
+                            <td>
+                                <input type="button" className="btn btn-info" style={{width: 70}} onClick={()=>this.onEnterClickAlbums()} value="Enter"/>
+                            </td>
+                        </tr>
                     </table>
                 )},
                 artists: () =>{
@@ -309,7 +313,7 @@ class Admin extends Component{
                 genres: () =>{
                     return(
                     <table className="table table-striped m-b-none">
-                            <tr className="table-border">
+                        <tr className="table-border">
                             <td><input type="text" ref="addGenre" placeholder="Enter Genre Name" /></td>
                             <td><textarea ref="addGenreDescription" placeholder="Enter Genre Description" /></td>
                             <td>
@@ -322,7 +326,33 @@ class Admin extends Component{
                 tracks: () =>{
                     return(
                     <table className="table table-striped m-b-none">
-
+                        <tr className="table-border">
+                            <td>
+                                <select ref="addArtist2" id="addArtist2">
+                                <option value={0} className="text-muted">---Select Album---</option>
+                                {this.renderAlbumSelect()}
+                                </select>
+                            </td>
+                            <td>
+                                <select ref="addArtist2" id="addArtist2">
+                                <option value={0} className="text-muted">---Select Artist---</option>
+                                {this.renderArtistSelect()}
+                                </select>
+                            </td>
+                            <td><input type="number" ref="addTracknumber" /></td>
+                            <td><input type="text" ref="addTrackname" placeholder="Enter Track Name" /></td>
+                            <td><input type="text" ref="addPlaytime" placeholder="Enter Playtime" /></td>
+                            <td>
+                                <select ref="addTitletrack" id="addTitletrack">
+                                    <option value={0} >No</option>
+                                    <option value={1} >Yes</option>
+                                </select>
+                            </td>
+                            <td><input type="text" ref="addRanking" placeholder="Enter Ranking" /></td>
+                            <td>
+                                <input type="button" className="btn btn-info" style={{width: 70}} onClick={()=>this.onEnterClickTracks()} value="Enter"/>
+                            </td>
+                        </tr>
                     </table>
 
                 )}
@@ -340,6 +370,23 @@ class Admin extends Component{
             else{
                 return(
                     <option value={item.id} id={item.id}>{item.name}</option>
+                    )
+            }
+            
+        })
+        return arrJSX
+    }
+
+    renderAlbumSelect(){
+        var arrJSX = this.state.listAlbums.map((item)=>{
+            if(this.props.album_name === item.album_name){
+                return(
+                    <option value={item.id} id={item.id} selected="selected">{item.album_name}</option>
+                    )
+            }
+            else{
+                return(
+                    <option value={item.id} id={item.id}>{item.album_name}</option>
                     )
             }
             

@@ -24,9 +24,7 @@ class AlbumCard extends Component {
             </div>
             </Link>
             <div className="padder-v">
-                <OverlayTrigger placement="top" overlay={tooltip} >
                 <Link to = {albumURL} className="text-ellipsis">{this.props.title}</Link>
-                </OverlayTrigger>
                 <Link to = {artistURL} className="text-ellipsis text-xs text-muted">{this.props.artist}</Link>
             </div>
             </div>
