@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, withRouter } from 'react-router-dom';
+import {Route, withRouter, Switch } from 'react-router-dom';
 
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -50,7 +50,8 @@ class App extends Component {
       return (
         <div className="App">
           <Header/>
-          <div>
+          <div style={{"padding-bottom":"80px"}}>
+            <Switch>
             <Route exact path="/" component = {HomePage}/>
             <Route path="/SignIn" component = {SignIn}/>
             <Route path="/ArtistPage" component = {ArtistPage}/>
@@ -58,10 +59,12 @@ class App extends Component {
             <Route path="/AlbumPage" component = {AlbumPage}/>
             <Route path="/Admin/:table" component = {Admin}/>
             <Route path="/browse" component = {BrowsePage}/>
+            <Route path="/browse/:genre" component = {BrowsePage}/>
             <Route path="/account" component = {AccountPage}/>
             <Route path="/subscriptions" component = {Subscriptions}/>
+            </Switch>
           </div>  
-          {/* <Footer />       */}
+          <Footer />      
         </div>
       );
     }

@@ -16,7 +16,6 @@ class GenresDataTable extends Component {
         axios.put(API_URL_1 + "/admin/" + this.props.table + "/" + this.props.id,
             {
                 name: this.refs.editName.value,
-                description: this.refs.editDescription.value
             }
         )
         .then((res)=>{
@@ -53,7 +52,6 @@ class GenresDataTable extends Component {
                 <tr className="table-border">
                 <td>{this.props.id}</td>
                 <td>{this.props.name}</td>
-                <td>{this.props.description}</td>
                 <td>
                     <input type="button" className="btn btn-success" style={{width: 70}} onClick={()=>this.onEditClick()} value="Edit"/>
                     <br/>
@@ -63,7 +61,6 @@ class GenresDataTable extends Component {
                 <tr className="table-border">
                 <td>{this.props.id}</td>
                 <td><input type="text" ref="editName" defaultValue={this.props.name}/></td>
-                <td><input type="text" ref="editDescription" defaultValue={this.props.description}/></td>
                 <td>
                     <input type="button" className="btn btn-primary" style={{width: 70}} onClick={()=>this.onSaveClick()} value="Save"/>
                     <br/>

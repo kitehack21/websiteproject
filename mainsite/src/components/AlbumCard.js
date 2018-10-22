@@ -24,8 +24,8 @@ class AlbumCard extends Component {
             </div>
             </Link>
             <div className="padder-v">
-                <Link to = {albumURL} className="text-ellipsis">{this.props.title}</Link>
-                <Link to = {artistURL} className="text-ellipsis text-xs text-muted">{this.props.artist}</Link>
+                <Link to = {albumURL} className="text-ellipsis" title={this.props.title}>{this.props.title}</Link>
+                <Link to = {artistURL} className="text-ellipsis text-xs text-muted" title={this.props.artist}>{this.props.artist}</Link>
             </div>
             </div>
         </div>

@@ -4,28 +4,23 @@ import "react-jinke-music-player/assets/index.css";
 import swal from "sweetalert";
 import FaHeadphones from "react-icons/lib/fa/headphones";
 import { createRandomNum } from "../assets/utils.js";
-import "../css/index.less"
+import {connect} from 'react-redux'
+
 
 const options = {
     //audio lists model
     audioLists: [
       {
-        name: "丑",
-        singer: "草东没有派对",
-        cover: "https://www.lijinke.cn/music/1387583682387727.jpg",
-        musicSrc: "https://www.lijinke.cn/music/201711082.mp3"
+        name: "Im your girl",
+        singer: "KHAN",
+        cover: "http://localhost:1994/dreamcatcher-prequel.jpg",
+        musicSrc: "http://localhost:1994/KHAN/01.%20I%60m%20Your%20Girl%20_.mp3"
       },
       {
-        name: "达尔文",
-        singer: "蔡健雅",
-        cover: "https://www.lijinke.cn/music/5V49G-3GFLn-f6mRjHsGaUAh.jpg",
-        musicSrc: "https://www.lijinke.cn/music/20171108.mp3"
-      },
-      {
-        name: "十年青春换绝症",
-        singer: "贰佰",
-        cover: "https://www.lijinke.cn/music/18892908300128861.jpg",
-        musicSrc: "https://www.lijinke.cn/music/201711081.mp3"
+        name: "HANN",
+        singer: "(G)I-DLE",
+        cover: "http://localhost:1994/(G)I-DLE%20-%20HANN%20(Alone)/gidle-han.jpg",
+        musicSrc: "http://localhost:1994/(G)I-DLE - HANN (Alone)/01. 한 (一).mp3"
       }
     ],
   
@@ -46,7 +41,7 @@ const options = {
   
     //Whether to load audio immediately after the page loads.  [type `Boolean | String`, default `false`]
     //"auto|metadata|none" "true| false"
-    preload: false,
+    preload: "auto",
   
     //Whether the player's background displays frosted glass effect  [type `Boolean`, default `false`]
     glassBg: false,
@@ -59,8 +54,8 @@ const options = {
   
     //audio controller initial position    [ type `Object` default '{top:0,left:0}' ]
     defaultPosition: {
-      top: 300,
-      left: 120
+      top: 620,
+      left: 1300
     },
   
     // play mode text config of the audio player
@@ -100,16 +95,16 @@ const options = {
     once: true,
   
     //Whether the audio is played after loading is completed. [type `Boolean` default 'true']
-    autoPlay: true,
+    autoPlay: false,
   
     //Whether you can switch between two modes, full => mini  or mini => full   [type 'Boolean' default 'true']
-    toggleMode: false,
+    toggleMode: true,
   
     //audio cover is show of the "mini" mode [type `Boolean` default 'true']
-    showMiniModeCover: false,
+    showMiniModeCover: true,
   
     //audio playing progress is show of the "mini"  mode
-    showMiniProcessBar: false,
+    showMiniProcessBar: true,
   
     //audio controller is can be drag of the "mini" mode     [type `Boolean` default `true`]
     drag: true,
@@ -136,7 +131,7 @@ const options = {
     showPlayMode: true,
   
     //theme toggle switch  display of the audio player panel   [type `Boolean` default `true`]
-    showThemeSwitch: true,
+    showThemeSwitch: false,
   
     //Extensible custom content       [type 'Array' default '[]' ]
     extendsContent: [],
@@ -152,7 +147,7 @@ const options = {
   
     //Music is downloaded handle
     onAudioDownload(audioInfo) {
-      swal("download successfully", "", "success");
+      alert("download successfully", "", "success");
       console.log("audio download", audioInfo);
     },
   
@@ -313,11 +308,17 @@ class Footer extends Component{
       };
     
     render(){
+      console.log(this.props.audioLists)
         const { params } = this.state;
         return(
-            <ReactJkMusicPlayer {...params} />
+            <ReactJkMusicPlayer {...params} audioLists={this.props.audioLists}/>
         )
     }
 }
 
-export default Footer;
+const mapStateToProps = (state) =>{
+  var audioLists = state.playlist
+  return {audioLists}
+}
+
+export default connect(mapStateToProps, {})(Footer);

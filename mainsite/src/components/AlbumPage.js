@@ -60,6 +60,6 @@ class AlbumPage extends Component{
 const mapStateToProps = (state) => {
     const select = state.select;
     return {select};
-  }
+}
   //export
-  export default connect(mapStateToProps, null)(AlbumPage);
+export default connect(mapStateToProps, null)(AlbumPage);

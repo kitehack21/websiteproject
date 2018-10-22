@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
- 
-var number = 1;
+import {Link} from 'react-router-dom'
 
 class TopSongs extends Component {
     render(){
-        return(                          
-            <a href="#" className="list-group-item clearfix">
+        var albumURL = "/AlbumPage?album=" + this.props.album_id + "&artist=" + this.props.artist_id
+
+        return(
+            <Link to={albumURL}>                      
+            <a className="list-group-item clearfix">
                 <span className="pull-right h2 text-muted m-l">{this.props.ranking}</span>
                 <span className="pull-left thumb-sm m-r">
                 <img src={this.props.album_art} alt={this.props.album_art} />
@@ -17,7 +19,8 @@ class TopSongs extends Component {
                 <br/>
                 <small className="text-muted clear text-ellipsis pull-left">by {this.props.artist_name}</small>
                 </span>
-            </a>          
+            </a>
+            </Link>           
         )
     }
 }

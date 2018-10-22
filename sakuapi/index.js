@@ -10,6 +10,7 @@ var url = bodyParser.urlencoded({extended:false})
 const cors = require('cors');
 app.use(cors())
 
+app.use(express.static('public'))
 app.set('view engine' , 'ejs');
 app.use(url)
 app.use(bodyParser.json())
@@ -39,7 +40,7 @@ app.get('/newreleases', function(req,res){
 
 app.get('/topsongs', function(req,res){
     console.log(req.query)
-    var sql = `select tr.id as id, tr.name as track_name, tr.ranking as ranking, al.album_name as album_name, al.album_art as album_art, ar.name as artist_name from tracks tr JOIN albums al ON tr.album_id = al.id JOIN artists ar ON tr.artist_id = ar.id ORDER BY -ranking DESC LIMIT 6`
+    var sql = `select tr.id as id, tr.name as track_name, tr.ranking as ranking, al.id as album_id, al.album_name as album_name, al.album_art as album_art, ar.id as artist_id, ar.name as artist_name from tracks tr JOIN albums al ON tr.album_id = al.id JOIN artists ar ON tr.artist_id = ar.id ORDER BY -ranking DESC LIMIT 6`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
@@ -58,7 +59,7 @@ app.get('/artists/:id', function(req,res){
 
 app.get('/artistinfo/:id', function(req,res){
     var sql = `SELECT * FROM artists WHERE id=${req.params.id}`
-    var sql1 = `SELECT * FROM albums WHERE artist_id=${req.params.id}`
+    var sql1 = `SELECT * FROM albums WHERE artist_id=${req.params.id} ORDER BY release_date DESC`
     var sql2 = `SELECT tr.id as track_id, album_id, tr.artist_id as artist_id, number, tr.name as track_name, playtime, 
                 ranking, al.album_name as album_name, release_date, title_track FROM tracks tr LEFT JOIN albums al
                 ON al.id = tr.album_id WHERE tr.artist_id=1 ORDER BY release_date DESC`
@@ -84,6 +85,50 @@ app.get('/albumAndTracks/:id', function(req,res){
             if(err) throw err;
             res.send({album: results, tracks:results1})
         })
+    })
+})
+
+app.get('/albums/browse', function(req,res){
+    if(req.query.genre == null){
+        var sql = `SELECT al.id as album_id, ar.name as artist_name, album_art, album_name, release_date, al.artist_id, count(tr.album_id) as tracksAmount
+                    FROM albums al
+                    JOIN artists ar
+                    ON al.artist_id = ar.id
+                    LEFT JOIN tracks tr
+                    ON al.id = tr.album_id
+                    GROUP BY tr.album_id
+                    ORDER BY release_date DESC`
+    }
+    else{
+        var sql = `SELECT al.id as album_id, ar.name as artist_name, album_art, album_name, release_date, al.artist_id, count(tr.album_id) as tracksAmount
+        FROM albums al
+        JOIN artists ar
+        ON al.artist_id = ar.id
+        LEFT JOIN tracks tr
+        ON al.id = tr.album_id
+        JOIN album_genres ag
+        ON ag.album_id = al.id
+        WHERE ag.genre_id = '${req.query.genre}'
+        GROUP BY tr.album_id
+        ORDER BY release_date DESC`
+    }
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send({albums:results})
+    })
+})
+
+app.get('/albums/browse', function(req,res){
+    var sql = `SELECT al.id as album_id, ar.name as artist_name, album_art, album_name, artist_id
+    FROM albums al
+    JOIN artists ar
+    ON al.artist_id = ar.id
+    ORDER BY release_date DESC`
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send({albums:results})
     })
 })
 
@@ -342,28 +387,13 @@ app.post('/subscribe', function(req,res){
 //     if(req)
 // })
 
-app.get('/test', function(req,res){
-    const cipher = crypto.createHmac("sha256", secret)
-    .update(req.query.password)
-    .digest("hex");
-    console.log(cipher)
-    sql = `SELECT id, username, email FROM users WHERE email = "${req.query.email}" AND password = "${cipher}"`
-    conn.query(sql, (err,results)=>{
+app.get('/addPlaylist/:id', function(req,res){
+
+    sql = `SELECT tr.id as track_id, tr.playtime as playtime, tr.name as track_name, tr.source as source, ar.name as artist_name, al.album_name as album_name, al.album_art as album_art FROM tracks tr JOIN artists ar ON tr.artist_id = ar.id JOIN albums al ON tr.album_id = al.id WHERE tr.id=${req.params.id}`
+
+    conn.query(sql, (err, results)=>{
         if(err) throw err;
-        console.log(results)
-        sql1=`SELECT * FROM subscriptions WHERE user_id=${results[0].id} AND status = "active" ORDER BY end_date DESC`
-        conn.query(sql1, (err1,results1)=>{
-            if(err1) throw err1;
-            console.log(results1)
-            if(results1[0].end_date > moment().format("YYYY/MM/DD")){
-                res.send({user:results, subscription: results1[0]})
-            }
-            else{
-                sql2=`UPDATE `
-                res.send({user:results, subscription: {...results1[0], status:"inactive"}})
-            }
-            
-        })
+        res.send(results)
     })
 })
 

@@ -10,7 +10,7 @@ class Header extends Component{
     this.props.onLogout();
   }
     renderNavbar(){
-      if(this.props.auth.username != ""){
+      if(this.props.auth.username !== ""){
         return(
           <Navbar className="bg-dark dk" collapseOnSelect fixedTop={true}>
           <Navbar.Header >
@@ -21,10 +21,10 @@ class Header extends Component{
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
-              <NavItem eventKey={1} href="#">
+              <NavItem eventKey={1}>
                 <Link to="/Admin/albums">Test Admin</Link>
               </NavItem>
-              <NavItem eventKey={2} href="#">
+              <NavItem eventKey={2}>
                 <Link to="/browse">Browse</Link>
               </NavItem>
               <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
@@ -35,7 +35,7 @@ class Header extends Component{
               <Navbar.Form pullLeft>
                 <FormGroup>
                   <FormControl className="form-control input-s-lg no-border rounded col-xs-10" style={{"max-length":"200px"}} type="text" placeholder="Artist, Songs , Albums..." />
-                  <a href="#" class="fa fa-search btn-icon rounded colxs-2" style={{"margin-top":"10px"}}/>
+                  <a class="fa fa-search btn-icon rounded colxs-2" style={{"margin-top":"10px"}}/>
                 </FormGroup>{' '}
               </Navbar.Form>
               <NavDropdown eventKey={3} title={this.props.auth.username} id="basic-nav-dropdown">
@@ -57,10 +57,10 @@ class Header extends Component{
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <NavItem eventKey={1} href="#">
+            <NavItem eventKey={1}>
               <Link to="/Admin/albums">Test Admin</Link>
             </NavItem>
-            <NavItem eventKey={2} href="#">
+            <NavItem eventKey={2}>
             <Link to="/browse">Browse</Link>
             </NavItem>
             <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
@@ -68,10 +68,10 @@ class Header extends Component{
             </NavDropdown>
           </Nav>
           <Nav pullRight>
-            <NavItem eventKey={2} href="#">
+            <NavItem eventKey={2}>
               <Link to="/SignIn"> Sign In</Link>
             </NavItem>
-            <NavItem eventKey={2} href="#">
+            <NavItem eventKey={2}>
               <Link to="/RegisterPage">Register</Link>
             </NavItem>
           </Nav>

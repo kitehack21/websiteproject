@@ -25,8 +25,27 @@ class ArtistPage extends Component{
         console.log(this.state.albums)
         return this.state.albums.map(albums =>
         <AlbumCard key = {albums.id} album_id = {albums.id} title = {albums.album_name} 
-        image={albums.album_art} artist = {this.state.artist.name} artist_id={albums.artist_id}/>
+        image={albums.album_art} artist = {albums.release_date} artist_id={albums.artist_id}/>
         ) 
+    }
+
+    renderTracksHeader(){
+        return(
+            <li className="list-group-item">
+                <div className="pull-right m-l">
+                    Download
+                </div>
+                <a href="#" className="jp-play-me m-r-sm pull-left">
+                    <i className="icon-control-play text"></i>
+                    <i className="icon-control-pause text-active"></i>
+                </a>
+                <div className="clear text-ellipsis text-left">
+                    <strong></strong>
+                    <span className="pad-left"></span>
+                    <span className="text-muted"></span>
+                </div>
+            </li>
+        )
     }
 
     renderTracklist(){
@@ -41,11 +60,11 @@ class ArtistPage extends Component{
         return(
             <div className="container-fluid animated fadeInUp">
                 <section className="panel panel-default">
-                    <div className="panel-body bg-dark" >
+                    <div className="panel-body bg-dark dker" >
                         <div className="clearfix text-center m-t">
                             <div className="inline">
                                 <div className="thumb-lg">
-                                    <img src={this.state.artist.picture} className="img-circle" alt="..."/>
+                                    <img src={this.state.artist.picture} className="r r-2x img-full" alt="..."/>
                                 </div>
                                 <div className="h4 m-t m-b-xs">{this.state.artist.name}</div>
                                 <small className="text-muted m-b">Musical Artist</small>
@@ -58,7 +77,7 @@ class ArtistPage extends Component{
                         <Col md={12}>
                             <Nav bsStyle="pills" justified >
                                 <NavItem eventKey="home" md={4}>Home</NavItem>
-                                <NavItem eventKey="songs" md={4}>Songs</NavItem>
+                                <NavItem eventKey="tracks" md={4}>Tracks</NavItem>
                                 <NavItem eventKey="albums" md={4}>Albums</NavItem>
                             </Nav>
                         </Col>
@@ -69,8 +88,9 @@ class ArtistPage extends Component{
                                 HOME
                             </Col>
                             </Tab.Pane>
-                            <Tab.Pane eventKey="songs">
+                            <Tab.Pane eventKey="tracks">
                             <Col xs={8} md={8} xsPush={2} mdPush={2}>
+                                {this.renderTracksHeader()}
                                 {this.renderTracklist()}
                             </Col>
                             </Tab.Pane>

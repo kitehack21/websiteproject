@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {addQueue} from '../actions'
 
 
 class Tracklist extends Component {
@@ -13,18 +15,22 @@ class Tracklist extends Component {
         }
     }
 
+    onPlayClick = () =>{
+        this.props.addQueue(this.props.id)
+    }
+
     render(){
         return(
             <li className="list-group-item">
                 <div className="pull-right m-l">
-                    <a href="#" className="m-r-sm"><i className="icon-cloud-download" data-toggle="tooltip" data-placement="top" title="Download"></i></a>
-                    <a href="#" className="m-r-sm"><i className="icon-plus" data-toggle="tooltip" data-placement="top" title="Add to playlist" ></i></a>
-                    <a href="#" className="pull-right active" data-toggle="className" data-placement="top" title="Favorite" >
+                    <a href="" className="m-r-sm"><i className="icon-cloud-download" data-toggle="tooltip" data-placement="top" title="Download"></i></a>
+                    <a href="" className="m-r-sm"><i className="icon-plus" data-toggle="tooltip" data-placement="top" title="Add to playlist" ></i></a>
+                    <a href="" className="pull-right active" data-toggle="className" data-placement="top" title="Favorite" >
                         <i className="fa fa-heart-o text-active"   ></i>
                         <i className="fa fa-heart text text-danger"  title="Favorited"></i>
                     </a> 
                 </div>
-                <a href="#" className="jp-play-me m-r-sm pull-left">
+                <a onClick={()=>this.onPlayClick()} className="jp-play-me m-r-sm pull-left">
                     <i className="icon-control-play text"></i>
                     <i className="icon-control-pause text-active"></i>
                 </a>
@@ -39,4 +45,4 @@ class Tracklist extends Component {
     }
 }
 
-export default Tracklist
+export default connect(null, {addQueue})(Tracklist)

@@ -38,31 +38,52 @@ class Subscriptions extends Component{
                 </div>
                 <div className="container-fluid animated fadeInUp" style={{"max-width": "1200px"}}>
                     <section className="panel panel-default">
-                        <div className="panel-body bg-dark" >
-                            <div className="clearfix m-t">
-                                    <div className="col-md-3">BASIC STREAMING PASS</div>
-                                    <div className="col-md-4">
-                                        <div><div className="label bg-success">PC | Mobile</div>   30 DAYS UNLIMITED MUSIC STREAMING</div>
-                                        <div><div className="label bg-success">Mobile</div>   ENABLE OFFLINE STORAGE ON MOBILE</div>
-                                    </div>
-                                    <div className="col-md-2 text-right"> Rp.100,000.-</div>
-                                    <div className="col-md-3 text-right"><input className="btn btn-success" type="button" value="Purchase" onClick={()=>this.onPurchaseClick()}/></div>                      
+                        <div className="panel-body bg-dark" style={{"padding":0}} >
+                            <div className="clearfix" style={{"padding":0}}>
+                                <div className="col-md-3 bg-success padder-v" style={{"height":"80px"}}>
+                                    <div className="m-t" style={{"color":"white"}}><i className="fa fa-mobile"/>    MOBILE ONLY PASS</div>
+                                </div>
+                                <div className="col-md-4 padder-v">
+                                    <div><div className="label bg-success">Mobile</div>   30 DAYS UNLIMITED MUSIC STREAMING</div>
+                                    <div><div className="label bg-success">Mobile</div>   ENABLE OFFLINE STORAGE ON MOBILE</div>
+                                </div>
+                                <div className="col-md-2 text-right padder-v"> Rp.80,000.-</div>
+                                <div className="col-md-3 text-right padder-v"><input className="btn btn-success" type="button" value="Purchase" onClick={()=>this.onPurchaseClick()}/></div>                      
                             </div>
-                            </div>
+                        </div>
                     </section>
                 </div>
                 <div className="container-fluid animated fadeInUp" style={{"max-width": "1200px"}}>
                     <section className="panel panel-default">
-                        <div className="panel-body bg-dark" >
-                            <div className="clearfix m-t">
-                                    <div className="col-md-3">DELUXE STREAMING PASS</div>
+                        <div className="panel-body bg-dark" style={{"padding":0}} >
+                            <div className="clearfix" style={{"padding":0}}>
+                                <div className="col-md-3 bg-success padder-v" style={{"height":"80px"}}>
+                                    <div className="m-t" style={{"color":"white"}}><i className="fa fa-ticket"/>  BASIC STREAMING PASS</div>
+                                </div>
+                                <div className="col-md-4 padder-v">
+                                    <div><div className="label bg-success">PC | Mobile</div>   30 DAYS UNLIMITED MUSIC STREAMING</div>
+                                    <div><div className="label bg-success">Mobile</div>   ENABLE OFFLINE STORAGE ON MOBILE</div>
+                                </div>
+                                <div className="col-md-2 text-right padder-v"> Rp.100,000.-</div>
+                                <div className="col-md-3 text-right padder-v"><input className="btn btn-success" type="button" value="Purchase" onClick={()=>this.onPurchaseClick()}/></div>                      
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div className="container-fluid animated fadeInUp" style={{"max-width": "1200px"}}>
+                    <section className="panel panel-default">
+                        <div className="panel-body bg-dark" style={{"padding":0}} >
+                            <div className="clearfix" style={{"padding":0}}>
+                                    <div className="col-md-3 bg-success padder-v" style={{"height":"80px"}}>
+                                        <div className="m-t" style={{"color":"white"}}><i className="fa fa-star"/>  DELUXE STREAMING PASS</div>
+                                    </div>
                                     <div className="col-md-4">
                                         <div><div className="label bg-success">PC | Mobile</div>  30 DAYS UNLIMITED MUSIC STREAMING</div>
                                         <div><div className="label bg-success">Mobile</div>     ENABLE OFFLINE STORAGE ON MOBILE</div>
                                         <div><div className="label bg-success">PC | Mobile</div> DOWNLOAD 30 MP3s</div>
                                     </div>
-                                    <div className="col-md-2 text-right"> Rp.250,000.-</div>
-                                    <div className="col-md-3 text-right"><input className="btn btn-success" type="button" value="Purchase" onClick={()=>this.onPurchaseClick()}/></div>                      
+                                    <div className="col-md-2 text-right padder-v"> Rp.250,000.-</div>
+                                    <div className="col-md-3 text-right padder-v"><input className="btn btn-success m-t-xs" type="button" value="Purchase" onClick={()=>this.onPurchaseClick()}/></div>                      
                             </div>
                             </div>
                     </section>

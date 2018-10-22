@@ -22,16 +22,10 @@ class TopList extends Component {
     renderTopSongs = () =>{
         console.log(this.state)
         return this.state.albums.map(songs =>
-        <TopSongs key = {songs.id} track_name = {songs.track_name} ranking={songs.ranking} album_name={songs.album_name} album_art={songs.album_art} artist_name = {songs.artist_name}/>
+        <TopSongs key = {songs.id} album_id={songs.album_id} artist_id={songs.artist_id} track_name = {songs.track_name} ranking={songs.ranking} album_name={songs.album_name} album_art={songs.album_art} artist_name = {songs.artist_name}/>
         )   
     }
-    top5(arr){
-        var output = [];
-        for(var i = 0; i <7 ; i++){
-            output.push(arr[i]);
-        }
-        return output
-    }
+    
     render(){
         console.log(this.state)
         return(
@@ -47,7 +41,7 @@ class TopList extends Component {
                         </span>
                     </h3>
                     <div className="list-group bg-dark list-group-lg no-bg auto">  
-                        {this.top5(this.renderTopSongs())}
+                        {this.renderTopSongs()}
                     </div>
                 </div>
             </div>

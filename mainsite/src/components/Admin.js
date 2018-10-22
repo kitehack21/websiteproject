@@ -88,7 +88,6 @@ class Admin extends Component{
     onEnterClickGenres(){
         var data = {
             name: this.refs.addGenre.value,
-            description: this.refs.addGenreDescription.value
         }
         axios.post(API_URL_1 + "/admin/genres" , data)
             .then((res)=>{
@@ -217,7 +216,6 @@ class Admin extends Component{
                 <tr>
                 <th style={{width: "2%"}}>ID</th>
                 <th style={{width: "8%"}}>Name</th>
-                <th style={{width: "20%"}}>Description</th>
                 <th style={{width: "20%"}}>Actions</th>
                 </tr>
             </thead>
@@ -315,7 +313,6 @@ class Admin extends Component{
                     <table className="table table-striped m-b-none">
                         <tr className="table-border">
                             <td><input type="text" ref="addGenre" placeholder="Enter Genre Name" /></td>
-                            <td><textarea ref="addGenreDescription" placeholder="Enter Genre Description" /></td>
                             <td>
                                 <input type="button" className="btn btn-info" style={{width: 70}} onClick={()=>this.onEnterClickGenres()} value="Enter"/>
                             </td>

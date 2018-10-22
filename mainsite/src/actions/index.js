@@ -87,3 +87,25 @@ export const cookieChecked = () =>{
         type: "COOKIES_CHECKED"
     })
 };
+
+export const addQueue = (id) =>{
+    return(dispatch) => {
+        axios.get(API_URL_1 + "/addPlaylist/" + id)
+        .then((res)=>{
+            console.log("ADD QUEUE")
+            dispatch ({
+                type: "ADD_TO_QUEUE",
+                payload: {
+                    name: res.data[0].track_name,
+                    singer: res.data[0].artist_name,
+                    cover: res.data[0].album_art,
+                    musicSrc: `${API_URL_1}/tracks/${res.data[0].source}`
+                }
+            })
+        })
+        .catch((err)=>{
+            console.log(err)
+            console.log("Add Queue error")
+        })
+    }
+}

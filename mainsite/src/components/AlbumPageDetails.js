@@ -21,7 +21,7 @@ class AlbumPageDetails extends Component {
             <div className="row">
                 <div className="col-sm-8 col-sm-push-1">
                   <div className="panel wrapper-lg">
-                    <div className="row">
+                    <div className="row bg-light dker padder-v" style={{height:"200%"}}>
                       <div className="col-sm-4">
                         <img src={this.props.albumcover} className="img-full m-b album-border"/>
                       </div>
@@ -32,7 +32,7 @@ class AlbumPageDetails extends Component {
                             <img src={this.props.picture} className="img-circle" />
                           </Link>
                           <div className="clear text-justify">
-                            <Link to = {artistURL} className="text-info">{this.props.name}</Link>
+                            <Link to = {artistURL} className="text-success">{this.props.name}</Link>
                             <small className="block text-muted">12,500,000 followers / 30 following</small>
                           </div>
                         </div>
@@ -52,7 +52,7 @@ class AlbumPageDetails extends Component {
                             </tr>
                           </table>
                           <br/>
-                          <a href="#" className="btn btn-info ">Play</a> <a href="#comments" className="btn btn-default">3 Comments</a>
+                          <a href="#" className="btn btn-success "><i className="fa fa-play-circle"/>  Play</a> <a href="#comments" className="btn btn-default">3 Comments</a>
                         </div>
                         <div>
                           Tags: <a href="#" className="badge bg-light">K-POP</a> <a href="#" className="badge bg-light">Taeyeon</a> <a href="#" className="badge bg-light">태연</a>
@@ -60,7 +60,7 @@ class AlbumPageDetails extends Component {
                       </div>
                     </div>
                     <div className="m-t">
-                      <p className="text-justify" ><strong>{this.props.albumtitle}</strong> {this.props.description}</p>
+                      <p className="text-justify panel" ><strong>{this.props.albumtitle}</strong> {this.props.description}</p>
                     </div>
                     <h4 className="m-t-lg m-b text-left">Track List</h4>
                     <ul className="list-group list-group-lg">
