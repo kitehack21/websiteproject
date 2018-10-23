@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {API_URL_1} from '../supports/api-url/apiurl'
+import {API_URL_1, API_URL_ALBUM_COVERS} from '../supports/api-url/apiurl'
 import AlbumsDataTable from './AlbumsDataTable'
 import ArtistsDataTable from './ArtistsDataTable'
 import GenresDataTable from './GenresDataTable'
@@ -151,7 +151,7 @@ class Admin extends Component{
                 <th  style={{width: "20%"}}>Album Name</th>
                 <th  style={{width: "8%"}}>Release Date</th>
                 <th  style={{width: "10%"}}>Album Art</th>
-                <th  style={{width: "40%"}}>Description</th>
+                <th  style={{width: "30%"}}>Description</th>
                 <th  style={{width: "7%"}}>Actions</th>
                 </tr>
             </thead>
@@ -161,7 +161,7 @@ class Admin extends Component{
     renderAlbumsDataTable(){
         return this.state.data.map((item) =>
         <AlbumsDataTable key={item.album_id} table={this.props.match.params.table} listArtists={this.state.listArtists} artist_name={item.artist_name} album_id={item.album_id} 
-        album_name={item.album_name} release_date={item.release_date} album_art={item.album_art} description={item.description} refresh={()=>this.refreshData()}/>)
+        album_name={item.album_name} release_date={item.release_date} album_art={`${API_URL_ALBUM_COVERS}/${item.album_art}`} description={item.description} refresh={()=>this.refreshData()}/>)
     }
 
     renderArtistsTableHead(){
@@ -282,10 +282,10 @@ class Admin extends Component{
                                 {this.renderArtistSelect()}
                                 </select>
                             </td>
-                            <td><input type="text" id="addAlbum" ref="addAlbum" placeholder="Enter Album Name" style={{width: 220}}/></td>
+                            <td><input type="text" id="addAlbum" ref="addAlbum" placeholder="Enter Album Name" style={{width: 200}}/></td>
                             <td><input type="text" id="addReleaseDate" ref="addReleaseDate" placeholder="Enter release date" style={{width: 120}}/></td>
                             <td><input type="text" id="addAlbumArt" ref="addAlbumArt" placeholder="Enter picture link" /></td>
-                            <td><textarea id="addDescription" ref="addDescription" placeholder="Enter album description" style={{resize:"none"}} rows= '4' cols= '80'/></td>
+                            <td><textarea id="addDescription" ref="addDescription" placeholder="Enter album description" style={{resize:"none"}} rows= '4' cols= '60'/></td>
                             <td>
                                 <input type="button" className="btn btn-info" style={{width: 70}} onClick={()=>this.onEnterClickAlbums()} value="Enter"/>
                             </td>
@@ -296,11 +296,11 @@ class Admin extends Component{
                     return(
                     <table className="table table-striped m-b-none">
                         <tr className="table-border">
-                            <td><input type="text" ref="addName" placeholder="Enter Artist Name" /></td>
-                            <td><input type="text" ref="addDebut" placeholder="Enter Debute Date" /></td>
-                            <td><input type="text" ref="addBirthday" placeholder="Enter Birthday (if applicable)"/></td>
-                            <td><input type="text" ref="addAgency" placeholder="Enter Artist's agency" /></td>
-                            <td><input type="text" ref="addPicture" placeholder="Enter Picture Link" /></td>
+                            <td style={{width: "8%"}}><input type="text" ref="addName" placeholder="Enter Artist Name" /></td>
+                            <td style={{width: "8%"}}><input type="text" ref="addDebut" placeholder="Enter Debut Date" /></td>
+                            <td style={{width: "8%"}}><input type="text" ref="addBirthday" placeholder="Enter Birthday (if applicable)" style={{"width": 200}}/></td>
+                            <td style={{width: "8%"}}><input type="text" ref="addAgency" placeholder="Enter Artist's agency" /></td>
+                            <td style={{width: "8%"}}><input type="text" ref="addPicture" placeholder="Enter Picture Link" /></td>
                             <td>
                                 <input type="button" className="btn btn-info" style={{width: 70}} onClick={()=>this.onEnterClickArtists()} value="Enter"/>
                             </td>
@@ -336,7 +336,7 @@ class Admin extends Component{
                                 {this.renderArtistSelect()}
                                 </select>
                             </td>
-                            <td><input type="number" ref="addTracknumber" /></td>
+                            <td><input type="number" ref="addTracknumber" style={{"width":"20px"}}/></td>
                             <td><input type="text" ref="addTrackname" placeholder="Enter Track Name" /></td>
                             <td><input type="text" ref="addPlaytime" placeholder="Enter Playtime" /></td>
                             <td>
@@ -395,9 +395,9 @@ class Admin extends Component{
         return(
         <section id="content">
             <section className="vbox">
-                <section className="scrollable padder">
+                <section className="scrollable padder ">
                     <div className="m-b-md">
-                    <h3 className="m-b-none">Admin Dashboard</h3>
+                        <h3 className="m-b-none">Admin Dashboard</h3>
                     </div>
                     <section className="panel panel-default">
                     Select Datatable:

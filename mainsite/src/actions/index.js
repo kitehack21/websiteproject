@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {API_URL_1} from '../supports/api-url/apiurl'
+import {API_URL_1, API_URL_ALBUM_COVERS, API_URL_TRACKS} from '../supports/api-url/apiurl'
 
 export const onLogin = (user) =>{
     return(dispatch) => {
@@ -98,8 +98,8 @@ export const addQueue = (id) =>{
                 payload: [{
                     name: res.data[0].track_name,
                     singer: res.data[0].artist_name,
-                    cover: res.data[0].album_art,
-                    musicSrc: `${API_URL_1}/tracks/${res.data[0].source}`
+                    cover: `${API_URL_ALBUM_COVERS}/${res.data[0].album_art}`,
+                    musicSrc: `${API_URL_TRACKS}/${res.data[0].artist_name}/${res.data[0].album_name}/${res.data[0].source}`
                 }]
             })
         })

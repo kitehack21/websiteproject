@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
-import {API_URL_1} from '../supports/api-url/apiurl'
+import {API_URL_1, API_URL_ALBUM_COVERS} from '../supports/api-url/apiurl'
 import AlbumPageDetails from './AlbumPageDetails'
 
 
@@ -36,7 +36,7 @@ class AlbumPage extends Component{
             picture={this.state.artist.picture} 
             album = {this.state.artist.albums} 
             albumtitle = {this.state.album.album_name}
-            albumcover = {this.state.album.album_art} 
+            albumcover = {`${API_URL_ALBUM_COVERS}/${this.state.album.album_art}`} 
             release = {this.state.album.release_date}
             genre = {this.state.album.release_date}
             publisher = {this.state.album.release_date}

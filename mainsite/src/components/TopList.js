@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {API_URL_1} from '../supports/api-url/apiurl'
+import {API_URL_1, API_URL_ALBUM_COVERS} from '../supports/api-url/apiurl'
 import axios from 'axios'
 import TopSongs from './TopSongs'
 
@@ -22,7 +22,7 @@ class TopList extends Component {
     renderTopSongs = () =>{
         console.log(this.state)
         return this.state.albums.map(songs =>
-        <TopSongs key = {songs.id} album_id={songs.album_id} artist_id={songs.artist_id} track_name = {songs.track_name} ranking={songs.ranking} album_name={songs.album_name} album_art={songs.album_art} artist_name = {songs.artist_name}/>
+        <TopSongs key = {songs.id} album_id={songs.album_id} artist_id={songs.artist_id} track_name = {songs.track_name} ranking={songs.ranking} album_name={songs.album_name} album_art={`${API_URL_ALBUM_COVERS}/${songs.album_art}`} artist_name = {songs.artist_name}/>
         )   
     }
     

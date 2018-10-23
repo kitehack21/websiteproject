@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {API_URL_1} from '../supports/api-url/apiurl'
+import {API_URL_1, API_URL_ALBUM_COVERS} from '../supports/api-url/apiurl'
 import AlbumCard from './AlbumCard'
 
 
@@ -24,7 +24,7 @@ class AlbumList extends Component {
         console.log(this.state)
         return this.state.albums.map(albums =>
         <AlbumCard key = {albums.album_id} album_id = {albums.album_id} title = {albums.album_name} 
-        image={albums.album_art} artist = {albums.artist_name} artist_id={albums.artist_id}/>
+        image={`${API_URL_ALBUM_COVERS}/${albums.album_art}`} artist = {albums.artist_name} artist_id={albums.artist_id}/>
         ) 
     }
 
