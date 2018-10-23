@@ -34,7 +34,7 @@ class Subscriptions extends Component{
         return(
             <div>
                 <div>
-                    <img src="https://i.imgur.com/8C7Fmrl.png" style={{"max-width": "100%"}}/>
+                    <img src="https://i.imgur.com/8C7Fmrl.png" style={{"max-width": "100%"}} alt=""/>
                 </div>
                 <div className="container-fluid animated fadeInUp" style={{"max-width": "1200px"}}>
                     <section className="panel panel-default">

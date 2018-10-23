@@ -35,7 +35,7 @@ class ArtistPage extends Component{
                 <div className="pull-right m-l">
                     Download
                 </div>
-                <a href="#" className="jp-play-me m-r-sm pull-left">
+                <a href="" className="jp-play-me m-r-sm pull-left">
                     <i className="icon-control-play text"></i>
                     <i className="icon-control-pause text-active"></i>
                 </a>

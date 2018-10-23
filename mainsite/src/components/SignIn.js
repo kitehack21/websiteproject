@@ -28,7 +28,7 @@ class SignIn extends Component {
     }
 
     errorRender(){
-      if(this.props.auth.error != ""){
+      if(this.props.auth.error !== ""){
         return (
           <div>
             <br/>
@@ -41,7 +41,7 @@ class SignIn extends Component {
     }
     render() {
       console.log(this.props.auth)
-      if(this.props.auth.username == ""){
+      if(this.props.auth.username === ""){
         return (
         <section id="content" className="m-t-lg wrapper-md animated fadeInUp">    
         <div className="container aside-xl">

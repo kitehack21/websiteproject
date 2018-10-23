@@ -1,14 +1,9 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {OverlayTrigger, Tooltip} from 'react-bootstrap'
 
 class AlbumCard extends Component {
+    
     render(){
-        const tooltip = (
-            <Tooltip id="tooltip" arrowOffsetLeft>
-              <strong>{this.props.title}</strong>
-            </Tooltip>
-          );
         var albumURL = "/AlbumPage?album=" + this.props.album_id + "&artist=" + this.props.artist_id
         var artistURL = "/ArtistPage?artist=" + this.props.artist_id
         return(

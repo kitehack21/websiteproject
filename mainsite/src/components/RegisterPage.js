@@ -30,7 +30,7 @@ class RegisterPage extends Component {
     }
 
     errorRender(){
-        if(this.props.auth.error != ""){
+        if(this.props.auth.error !== ""){
           return (
             <div>
               <br/>
@@ -43,7 +43,7 @@ class RegisterPage extends Component {
       }
  
     render(){
-        if(this.props.auth.username == ""){
+        if(this.props.auth.username === ""){
             return(
                 <section id="content" className="m-t-lg wrapper-md animated fadeInDown">
                     <div className="container aside-xl">

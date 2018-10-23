@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
-import AlbumCard from './AlbumCard'
-import {Nav, NavItem, Tabs, Tab, Pagination} from 'react-bootstrap'
+import {Tabs, Tab, Pagination} from 'react-bootstrap'
 
 class BrowsePage extends Component{
     constructor(props, context) {
@@ -55,7 +54,7 @@ class BrowsePage extends Component{
     }
     
     renderAlbumList = () =>{
-        if(this.state.albums.length == 0){
+        if(this.state.albums.length === 0){
             return(<div>No results found</div>)
         }
         else{
@@ -68,9 +67,9 @@ class BrowsePage extends Component{
                         <div className="col-md-12 text-muted text-sm padding-v text-ellipsis" title={albums.artist_name}>{albums.artist_name}</div>
                         <div className="col-md-12 m-t-lg">{albums.release_date} | {albums.tracksAmount} Tracks</div>
                         <div className="col-md-12 padding-v" style={{"margin-top":"60px"}}>
-                            <a href="#" className="btn btn-success " title="Play Album"><i className="fa fa-play-circle"/></a>
-                            <a href="#" className="btn btn-info" title="Buy Album"><i className="fa fa-shopping-cart"/></a>
-                            <a href="#" className="btn btn-danger " title="Like"><i className="fa  fa-heart"/></a>
+                            <a href="" className="btn btn-success " title="Play Album"><i className="fa fa-play-circle"/></a>
+                            <a href="" className="btn btn-info" title="Buy Album"><i className="fa fa-shopping-cart"/></a>
+                            <a href="" className="btn btn-danger " title="Like"><i className="fa  fa-heart"/></a>
                         </div>
                     </section>
                 </section>

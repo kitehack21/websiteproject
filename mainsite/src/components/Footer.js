@@ -5,7 +5,8 @@ import swal from "sweetalert";
 import FaHeadphones from "react-icons/lib/fa/headphones";
 import { createRandomNum } from "../assets/utils.js";
 import {connect} from 'react-redux'
-
+import Cookies from 'universal-cookie'
+import {addQueueCookie} from '../actions'
 
 const options = {
     //audio lists model
@@ -235,7 +236,32 @@ const options = {
     }
   };
 
+const cookies = new Cookies();
+
 class Footer extends Component{
+  componentWillMount(){
+    const theCookie = cookies.get('queueCookie');
+    console.log(theCookie)
+    
+    if(theCookie !== undefined){
+      this.props.addQueueCookie(theCookie)
+    }
+    else{
+      console.log("No cookie")
+    }
+  }
+  
+  componentWillReceiveProps(newProps){
+    const theCookie = cookies.get('queueCookie');
+    console.log(theCookie)
+    console.log(newProps.audioLists)
+    if(newProps.audioLists !== undefined){
+        var json_str = JSON.stringify(newProps.audioLists)
+        cookies.set('queueCookie', json_str, {path: "/"})
+        console.log("Make cookie")
+    }
+  }
+
     constructor(props) {
         super(props);
       }
@@ -317,8 +343,8 @@ class Footer extends Component{
 }
 
 const mapStateToProps = (state) =>{
-  var audioLists = state.playlist
+  var audioLists = state.queue
   return {audioLists}
 }
 
-export default connect(mapStateToProps, {})(Footer);
+export default connect(mapStateToProps, {addQueueCookie})(Footer);

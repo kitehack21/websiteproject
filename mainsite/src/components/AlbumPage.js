@@ -1,5 +1,4 @@
 import React,{Component} from 'react'
-import {Redirect, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'

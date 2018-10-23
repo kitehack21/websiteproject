@@ -42,6 +42,7 @@ class App extends Component {
   componentWillReceiveProps(newProps){
     if(newProps.auth.username === ""){
       cookies.remove("myCookie")
+      cookies.remove("queueCookie")
     }
   }
 
@@ -50,7 +51,7 @@ class App extends Component {
       return (
         <div className="App">
           <Header/>
-          <div style={{"padding-bottom":"80px"}}>
+          <div style={{"margin-bottom":"80px"}}>
             <Switch>
             <Route exact path="/" component = {HomePage}/>
             <Route path="/SignIn" component = {SignIn}/>

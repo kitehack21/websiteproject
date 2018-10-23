@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios'
 import {Link} from 'react-router-dom';
 import Tracklist from './Tracklist'
-import {API_URL_1} from '../supports/api-url/apiurl'
 
 
 class AlbumPageDetails extends Component {
@@ -23,13 +21,13 @@ class AlbumPageDetails extends Component {
                   <div className="panel wrapper-lg">
                     <div className="row bg-light dker padder-v" style={{height:"200%"}}>
                       <div className="col-sm-4">
-                        <img src={this.props.albumcover} className="img-full m-b album-border"/>
+                        <img src={this.props.albumcover} className="img-full m-b album-border" alt=""/>
                       </div>
                       <div className="col-sm-8">
                         <h2 className="m-t-none text-black text-justify">{this.props.albumtitle}</h2>
                         <div className="clearfix m-b-lg">
                           <Link to = {artistURL} className="thumb-sm pull-left m-r" style={{width:"10%"}}>
-                            <img src={this.props.picture} className="img-circle" />
+                            <img src={this.props.picture} className="img-circle" alt=""/>
                           </Link>
                           <div className="clear text-justify">
                             <Link to = {artistURL} className="text-success">{this.props.name}</Link>
@@ -52,10 +50,10 @@ class AlbumPageDetails extends Component {
                             </tr>
                           </table>
                           <br/>
-                          <a href="#" className="btn btn-success "><i className="fa fa-play-circle"/>  Play</a> <a href="#comments" className="btn btn-default">3 Comments</a>
+                          <a href="" className="btn btn-success "><i className="fa fa-play-circle"/>  Play</a> <a href="comments" className="btn btn-default">3 Comments</a>
                         </div>
                         <div>
-                          Tags: <a href="#" className="badge bg-light">K-POP</a> <a href="#" className="badge bg-light">Taeyeon</a> <a href="#" className="badge bg-light">태연</a>
+                          Tags: <a href="" className="badge bg-light">K-POP</a> <a href="" className="badge bg-light">Taeyeon</a> <a href="" className="badge bg-light">태연</a>
                         </div>
                       </div>
                     </div>
@@ -70,11 +68,11 @@ class AlbumPageDetails extends Component {
                     <section className="comment-list block">
                       <article id="comment-id-1" className="comment-item">
                         <a className="pull-left thumb-sm">
-                          <img src="images/a0.png" className="img-circle"/>
+                          <img src="images/a0.png" className="img-circle" alt=""/>
                         </a>
                         <section className="comment-body m-b">
                           <header>
-                            <a href="#"><strong>John smith</strong></a>
+                            <a href=""><strong>John smith</strong></a>
                             <label className="label bg-info m-l-xs">Editor</label> 
                             <span className="text-muted text-xs block m-t-xs">
                               24 minutes ago
@@ -86,11 +84,11 @@ class AlbumPageDetails extends Component {
                       
                       <article id="comment-id-2" className="comment-item comment-reply">
                         <a className="pull-left thumb-sm">
-                          <img src="images/a1.png" className="img-circle"/>
+                          <img src="images/a1.png" className="img-circle" alt=""/>
                         </a>
                         <section className="comment-body m-b">
                           <header>
-                            <a href="#"><strong>John smith</strong></a>
+                            <a href=""><strong>John smith</strong></a>
                             <label className="label bg-dark m-l-xs">Admin</label> 
                             <span className="text-muted text-xs block m-t-xs">
                               26 minutes ago
@@ -102,11 +100,11 @@ class AlbumPageDetails extends Component {
                       
                       <article id="comment-id-2" className="comment-item">
                         <a className="pull-left thumb-sm">
-                          <img src="images/a2.png" className="img-circle"/>
+                          <img src="images/a2.png" className="img-circle" alt=""/>
                         </a>
                         <section className="comment-body m-b">
                           <header>
-                            <a href="#"><strong>John smith</strong></a>
+                            <a href=""><strong>John smith</strong></a>
                             <label className="label bg-dark m-l-xs">Admin</label> 
                             <span className="text-muted text-xs block m-t-xs">
                               26 minutes ago
@@ -137,48 +135,48 @@ class AlbumPageDetails extends Component {
                     <div className="panel-heading">Suggestions</div>
                     <div className="panel-body">
                       <article className="media">
-                        <a href="#" className="pull-left thumb-md m-t-xs">
-                          <img src="images/m18.jpg"/>
+                        <a href="" className="pull-left thumb-md m-t-xs">
+                          <img src="images/m18.jpg" alt=""/>
                         </a>
                         <div className="media-body">                        
-                          <a href="#" className="font-semibold">Bootstrap 3: What you need to know</a>
-                          <div className="text-xs block m-t-xs"><a href="#">Travel</a> 2 minutes ago</div>
+                          <a href="" className="font-semibold">Bootstrap 3: What you need to know</a>
+                          <div className="text-xs block m-t-xs"><a href="">Travel</a> 2 minutes ago</div>
                         </div>
                       </article>
                       <article className="media">
-                        <a href="#" className="pull-left thumb-md m-t-xs">
-                          <img src="images/m19.jpg"/>
+                        <a href="" className="pull-left thumb-md m-t-xs">
+                          <img src="images/m19.jpg" alt=""/>
                         </a>
                         <div className="media-body">                        
-                          <a href="#" className="font-semibold">Lorem ipsum dolor sit amet it.</a>
-                          <div className="text-xs block m-t-xs"><a href="#">Design</a> 2 hours ago</div>
+                          <a href="" className="font-semibold">Lorem ipsum dolor sit amet it.</a>
+                          <div className="text-xs block m-t-xs"><a href="">Design</a> 2 hours ago</div>
                         </div>
                       </article>
                       <article className="media">
-                        <a href="#" className="pull-left thumb-md m-t-xs">
-                          <img src="images/m20.jpg"/>
+                        <a href="" className="pull-left thumb-md m-t-xs">
+                          <img src="images/m20.jpg" alt=""/>
                         </a>
                         <div className="media-body">                        
-                          <a href="#" className="font-semibold">Sed diam nonummy tincidunt ut laoreet</a>
-                          <div className="text-xs block m-t-xs"><a href="#">MFC</a> 1 week ago</div>
+                          <a href="" className="font-semibold">Sed diam nonummy tincidunt ut laoreet</a>
+                          <div className="text-xs block m-t-xs"><a href="">MFC</a> 1 week ago</div>
                         </div>
                       </article>
                       <article className="media">
-                        <a href="#" className="pull-left thumb-md m-t-xs">
-                          <img src="images/m21.jpg"/>
+                        <a href="" className="pull-left thumb-md m-t-xs">
+                          <img src="images/m21.jpg" alt=""/>
                         </a>
                         <div className="media-body">                        
-                          <a href="#" className="font-semibold">Lonummy nibh euismod sed laoreet</a>
-                          <div className="text-xs block m-t-xs"><a href="#">MFC</a> 1 week ago</div>
+                          <a href="" className="font-semibold">Lonummy nibh euismod sed laoreet</a>
+                          <div className="text-xs block m-t-xs"><a href="">MFC</a> 1 week ago</div>
                         </div>
                       </article>
                       <article className="media">
-                        <a href="#" className="pull-left thumb-md m-t-xs">
-                          <img src="images/m22.jpg"/>
+                        <a href="" className="pull-left thumb-md m-t-xs">
+                          <img src="images/m22.jpg" alt=""/>
                         </a>
                         <div className="media-body">                        
-                          <a href="#" className="font-semibold">Mibh euismod tincidunt ut laoreet</a>
-                          <div className="text-xs block m-t-xs"><a href="#">MFC</a> 1 week ago</div>
+                          <a href="" className="font-semibold">Mibh euismod tincidunt ut laoreet</a>
+                          <div className="text-xs block m-t-xs"><a href="">MFC</a> 1 week ago</div>
                         </div>
                       </article>
                     </div>
