@@ -11,7 +11,6 @@ class Admin extends Component{
 
     state= {data: [], listTables: [], listArtists: [], listAlbums: []}
  
-
     componentWillMount(){
         this.refreshData()
     }

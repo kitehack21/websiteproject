@@ -16,7 +16,15 @@ class Tracklist extends Component {
     }
 
     onPlayClick = () =>{
-        this.props.addQueue(this.props.id)
+        if(this.props.auth.username === ""){
+            alert("Please Login first")
+        }
+        else if(this.props.auth.subscription === "inactive"){
+            alert("You need to purchase a streaming pass to play music")
+        }
+        else{
+            this.props.addQueue(this.props.id)
+        }
     }
 
     render(){
@@ -45,4 +53,10 @@ class Tracklist extends Component {
     }
 }
 
-export default connect(null, {addQueue})(Tracklist)
+const mapStateToProps = (state) => {
+    const auth = state.auth;
+
+    return {auth}
+}
+
+export default connect(mapStateToProps, {addQueue})(Tracklist)

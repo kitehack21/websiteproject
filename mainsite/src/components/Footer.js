@@ -9,21 +9,8 @@ import Cookies from 'universal-cookie'
 import {addQueueCookie} from '../actions'
 
 const options = {
-    //audio lists model
-    audioLists: [
-      {
-        name: "Im your girl",
-        singer: "KHAN",
-        cover: "http://localhost:1994/dreamcatcher-prequel.jpg",
-        musicSrc: "http://localhost:1994/KHAN/01.%20I%60m%20Your%20Girl%20_.mp3"
-      },
-      {
-        name: "HANN",
-        singer: "(G)I-DLE",
-        cover: "http://localhost:1994/(G)I-DLE%20-%20HANN%20(Alone)/gidle-han.jpg",
-        musicSrc: "http://localhost:1994/(G)I-DLE - HANN (Alone)/01. 한 (一).mp3"
-      }
-    ],
+    // //audio lists model
+    // audioLists: [],
   
     //default play index of the audio player  [type `number` default `0`]
     defaultPlayIndex: 0,
@@ -42,13 +29,13 @@ const options = {
   
     //Whether to load audio immediately after the page loads.  [type `Boolean | String`, default `false`]
     //"auto|metadata|none" "true| false"
-    preload: "auto",
+    preload: "false",
   
     //Whether the player's background displays frosted glass effect  [type `Boolean`, default `false`]
     glassBg: false,
   
     //The next time you access the player, do you keep the last state  [type `Boolean` default `false`]
-    remember: false,
+    remember: true,
   
     //The Audio Can be deleted  [type `Boolean`, default `true`]
     remove: true,
@@ -173,10 +160,11 @@ const options = {
     },
   
     //The single song is ended handle
-    // onAudioEnded(audioInfo) {
-    //   swal("Song has ended!", "", "success");
-    //   console.log("audio ended", audioInfo);
-    // },
+    onAudioEnded(audioInfo) {
+      // swal("Song has ended!", "", "success");
+      console.log("audio ended", audioInfo);
+      console.log(audioInfo.trackId)
+    },
   
     //audio load abort The target event like {...,audioName:xx,audioSrc:xx,playMode:xx}
     onAudioAbort(e) {
@@ -208,6 +196,9 @@ const options = {
       console.log("audio lists change:", currentPlayIndex);
       console.log("audio lists change:", audioLists);
       console.log("audio lists change:", audioInfo);
+      var json_str = JSON.stringify(audioLists)
+        cookies.set('queueCookie', json_str, {path: "/"})
+        console.log("Make cookie")
     },
   
     onAudioPlayTrackChange(currentPlayIndex, audioLists, audioInfo) {
@@ -264,74 +255,74 @@ class Footer extends Component{
 
     constructor(props) {
         super(props);
-      }
-      state = {
-        params: options
+    }
+    state = {
+      params: options
+    };
+    onAddAudio = () => {
+      const data = {
+        ...this.state.params,
+        audioLists: [
+          ...this.state.params.audioLists,
+          {
+            name: "I'm new here",
+            singer: "jack",
+            cover: "http://www.lijinke.cn/music/1387583682387727.jpg",
+            musicSrc: "http://www.lijinke.cn/music/201711082.mp3"
+          }
+        ]
       };
-      onAddAudio = () => {
-        const data = {
-          ...this.state.params,
-          audioLists: [
-            ...this.state.params.audioLists,
-            {
-              name: "I'm new here",
-              singer: "jack",
-              cover: "http://www.lijinke.cn/music/1387583682387727.jpg",
-              musicSrc: "http://www.lijinke.cn/music/201711082.mp3"
-            }
-          ]
-        };
-        this.setState({
-          params: data
-        });
+      this.setState({
+        params: data
+      });
+    };
+    extendsContent = () => {
+      const data = {
+        ...this.state.params,
+        extendsContent: [
+          <button key="button" onClick={() => swal("I extend content")}>
+            button
+          </button>
+        ]
       };
-      extendsContent = () => {
-        const data = {
-          ...this.state.params,
-          extendsContent: [
-            <button key="button" onClick={() => swal("I extend content")}>
-              button
-            </button>
-          ]
-        };
-        this.setState({
-          params: data
-        });
+      this.setState({
+        params: data
+      });
+    };
+    onShowGlassBg = () => {
+      this.onChangeKey("glassBg");
+    };
+    onDrag = () => {
+      this.onChangeKey("drag");
+    };
+    onToggleMode = () => {
+      this.onChangeKey("toggleMode");
+    };
+    onSeeked = () => {
+      this.onChangeKey("seeked");
+    };
+    onChangeKey = key => {
+      const data = {
+        ...this.state.params,
+        [key]: !this.state.params[key]
       };
-      onShowGlassBg = () => {
-        this.onChangeKey("glassBg");
+      this.setState({ params: data });
+    };
+    showMiniProcessBar = () => {
+      this.onChangeKey("showMiniProcessBar");
+    };
+    showMiniModeCover = () => {
+      this.onChangeKey("showMiniModeCover");
+    };
+    playModeShowTime = () => {
+      const data = {
+        ...this.state.params,
+        playModeShowTime: createRandomNum(200, 2000)
       };
-      onDrag = () => {
-        this.onChangeKey("drag");
-      };
-      onToggleMode = () => {
-        this.onChangeKey("toggleMode");
-      };
-      onSeeked = () => {
-        this.onChangeKey("seeked");
-      };
-      onChangeKey = key => {
-        const data = {
-          ...this.state.params,
-          [key]: !this.state.params[key]
-        };
-        this.setState({ params: data });
-      };
-      showMiniProcessBar = () => {
-        this.onChangeKey("showMiniProcessBar");
-      };
-      showMiniModeCover = () => {
-        this.onChangeKey("showMiniModeCover");
-      };
-      playModeShowTime = () => {
-        const data = {
-          ...this.state.params,
-          playModeShowTime: createRandomNum(200, 2000)
-        };
-        this.setState({
-          params: data
-        });
-      };
+      this.setState({
+        params: data
+      });
+    };
     
     render(){
       console.log(this.props.audioLists)

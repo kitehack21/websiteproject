@@ -65,7 +65,7 @@ class App extends Component {
             <Route path="/subscriptions" component = {Subscriptions}/>
             </Switch>
           </div>  
-          <Footer />      
+          <Footer/>      
         </div>
       );
     }

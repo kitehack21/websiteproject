@@ -3,7 +3,7 @@ import {Nav, NavItem, Tab, Row, Col} from 'react-bootstrap'
 import axios from 'axios'
 import AlbumCard from './AlbumCard'
 import Tracklist from './Tracklist'
-import {API_URL_1} from '../supports/api-url/apiurl'
+import {API_URL_1, API_URL_ALBUM_COVERS} from '../supports/api-url/apiurl'
 
 class ArtistPage extends Component{
     state = {artist: [], albums:[] , tracks: []}
@@ -25,7 +25,7 @@ class ArtistPage extends Component{
         console.log(this.state.albums)
         return this.state.albums.map(albums =>
         <AlbumCard key = {albums.id} album_id = {albums.id} title = {albums.album_name} 
-        image={albums.album_art} artist = {albums.release_date} artist_id={albums.artist_id}/>
+        image={`${API_URL_ALBUM_COVERS}/${albums.album_art}`} artist = {albums.release_date} artist_id={albums.artist_id}/>
         ) 
     }
 
