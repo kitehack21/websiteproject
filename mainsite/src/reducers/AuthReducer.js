@@ -15,6 +15,10 @@ export default (state = INITIAL_STATE, action) =>{
             return {...state, cookieCheck: true}
         case "USER_LOGOUT" :
             return INITIAL_STATE;
+        case "SUBSCRIBED":
+            return {...state, subscription: "active"}
+        case "UNSUBSCRIBED" :
+            return {...state, subscription: "inactive"}
         default :   
             return state;
     }

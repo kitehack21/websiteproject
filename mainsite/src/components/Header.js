@@ -27,19 +27,19 @@ class Header extends Component{
               <NavItem eventKey={2}>
                 <Link to="/browse">Browse</Link>
               </NavItem>
-              <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-                <NavItem>Hello</NavItem>
-              </NavDropdown>
+              <NavItem eventKey={3}>
+                <Link to="/subscriptions">Purchase Pass</Link>
+              </NavItem>
             </Nav>
             <Nav pullRight>
-              <Navbar.Form pullLeft>
+              {/* <Navbar.Form pullLeft>
                 <FormGroup>
                   <FormControl className="form-control input-s-lg no-border rounded col-xs-10" style={{"max-length":"200px"}} type="text" placeholder="Artist, Songs , Albums..." />
                   <a class="fa fa-search btn-icon rounded colxs-2" style={{"margin-top":"10px"}}/>
                 </FormGroup>{' '}
-              </Navbar.Form>
+              </Navbar.Form> */}
               <NavDropdown eventKey={3} title={this.props.auth.username} id="basic-nav-dropdown">
-                <MenuItem>Account</MenuItem>
+                <MenuItem onSelect={() => this.props.history.push("/account")}>Account</MenuItem>
                 <MenuItem onSelect={this.onSignOutClick} >Sign Out</MenuItem>
               </NavDropdown>
             </Nav>
@@ -63,9 +63,9 @@ class Header extends Component{
             <NavItem eventKey={2}>
             <Link to="/browse">Browse</Link>
             </NavItem>
-            <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-              <NavItem>Hello</NavItem>
-            </NavDropdown>
+            <NavItem eventKey={3}>
+                <Link to="/subscriptions">Purchase Pass</Link>
+              </NavItem>
           </Nav>
           <Nav pullRight>
             <NavItem eventKey={2}>

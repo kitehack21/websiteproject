@@ -5,11 +5,12 @@ import AlbumsDataTable from './AlbumsDataTable'
 import ArtistsDataTable from './ArtistsDataTable'
 import GenresDataTable from './GenresDataTable'
 import TracksDataTable from './TracksDataTable'
+import IntegrationReactSelect from './MultiSelect'
 import "../css/datatables.css"
 
 class Admin extends Component{
 
-    state= {data: [], listTables: [], listArtists: [], listAlbums: []}
+    state= {data: [], listTables: [], listArtists: [], listAlbums: [], selectedGenres:[]}
  
     componentWillMount(){
         this.refreshData()
@@ -23,7 +24,7 @@ class Admin extends Component{
         })
         .then((response)=>{
             console.log(response.data)
-            this.setState({listArtists: response.data.listArtists, listAlbums: response.data.listAlbums, data: response.data.table })
+            this.setState({listArtists: response.data.listArtists, listAlbums: response.data.listAlbums, data: response.data.table})
         })
     }
     
@@ -48,17 +49,25 @@ class Admin extends Component{
             album_name: this.refs.addAlbum.value,
             release_date: this.refs.addReleaseDate.value,
             album_art: this.refs.addAlbumArt.value,
-            description: this.refs.addDescription.value}
+            description: this.refs.addDescription.value,
+        }
 
         axios.post(API_URL_1 + "/admin/albums", data)
             .then((res)=>{
                 console.log(res)
-                alert("SUCCESS")
-                this.refs.addAlbum.value = ""
-                this.refs.addReleaseDate.value = ""
-                this.refs.addAlbumArt.value = ""
-                this.refs.addDescription.value = ""
-                this.refreshData()
+                var data1 = {
+                    album_id: res.data.insertId,
+                    genres: this.state.selectedGenres
+                }
+                axios.post(API_URL_1 + "/albumgenres", data1)
+                .then((res)=>{
+                    alert("SUCCESS")
+                    this.refs.addAlbum.value = ""
+                    this.refs.addReleaseDate.value = ""
+                    this.refs.addAlbumArt.value = ""
+                    this.refs.addDescription.value = ""
+                    this.refreshData()
+                })
             })
             .catch((err)=>{
                 console.log(err)
@@ -77,6 +86,11 @@ class Admin extends Component{
             .then((res)=>{
                 console.log(res)
                 alert("SUCCESS")
+                this.refs.addName.value = ""
+                this.refs.addBirthday.value = ""
+                this.renderGenresDataTable.addDebut = ""
+                this.refs.addAgency.value = ""
+                this.refs.addPicture.value =""
                 this.refreshData()
             })
             .catch((err)=>{
@@ -141,15 +155,40 @@ class Admin extends Component{
         )
     }
 
+    sorter(fn, array){ 
+        for (let i = 0; i < array.length-1; i ++){
+            for (let j = i+1; j < array.length; j++){
+                if(fn(array[i],array[j])){
+                    var temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;
+                }
+            }
+        }
+        return array;
+    }
+    sortAsc(param){
+        var sortedArr = this.sorter(function(a,b){
+            return  (a[param] > b[param]) ;
+            },this.state.data);
+        this.setState({data : sortedArr})
+    }
+    sortDesc(param){
+        var sortedArr = this.sorter(function(a,b){
+            return  (a[param] < b[param]) ;
+            },this.state.data);
+        this.setState({data : sortedArr})
+    }
+
     renderAlbumsTableHead(){
         return(
             <thead>
                 <tr>
                 <th  style={{width: "2%"}}>ID</th>
-                <th  style={{width: "12%"}}>Artist</th>
-                <th  style={{width: "20%"}}>Album Name</th>
-                <th  style={{width: "8%"}}>Release Date</th>
-                <th  style={{width: "10%"}}>Album Art</th>
+                <th  style={{width: "12%"}}>Artist<input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortAsc("artist_name")} value="^"/><input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortDesc("artist_name")} value="v"/></th>
+                <th  style={{width: "20%"}}>Album Name <input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortAsc("album_name")} value="^"/><input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortDesc("album_name")} value="v"/></th>
+                <th  style={{width: "8%"}}>Release Date <input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortAsc("release_date")} value="^"/><input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortDesc("release_date")} value="v"/></th>
+                <th  style={{width: "10%"}}>Album Art </th>
                 <th  style={{width: "30%"}}>Description</th>
                 <th  style={{width: "7%"}}>Actions</th>
                 </tr>
@@ -168,10 +207,10 @@ class Admin extends Component{
             <thead>
                 <tr>
                 <th style={{width: "2%"}}>ID</th>
-                <th style={{width: "8%"}}>Name</th>
-                <th style={{width: "10%"}}>Debut</th>
-                <th style={{width: "10%"}}>Birthday</th>
-                <th style={{width: "15%"}}>Agency</th>
+                <th style={{width: "10%"}}>Name<input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortAsc("name")} value="^"/><input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortDesc("name")} value="v"/></th>
+                <th style={{width: "10%"}}>Debut<input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortAsc("debut")} value="^"/><input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortDesc("debut")} value="v"/></th>
+                <th style={{width: "10%"}}>Birthday<input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortAsc("birthday")} value="^"/><input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortDesc("birthday")} value="v"/></th>
+                <th style={{width: "15%"}}>Agency<input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortAsc("agency")} value="^"/><input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortDesc("agency")} value="v"/></th>
                 <th style={{width: "10%"}}>Artist Picture</th>
                 <th style={{width: "20%"}}>Actions</th>
                 </tr>
@@ -190,14 +229,14 @@ class Admin extends Component{
             <thead>
                 <tr>
                 <th style={{width: "2%"}}>ID</th>
-                <th style={{width: "10%"}}>Album</th>
-                <th style={{width: "10%"}}>Artist</th>
+                <th style={{width: "10%"}}>Album<input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortAsc("album_name")} value="^"/><input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortDesc("album_name")} value="v"/></th>
+                <th style={{width: "10%"}}>Artist<input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortAsc("artist_name")} value="^"/><input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortDesc("artist_name")} value="v"/></th>
                 <th style={{width: "5%"}}>Track No.</th>
-                <th style={{width: "20%"}}>Track Name</th>
-                <th style={{width: "5%"}}>Playtime</th>
+                <th style={{width: "15%"}}>Track Name<input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortAsc("name")} value="^"/><input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortDesc("name")} value="v"/></th>
+                <th style={{width: "11%"}}>Playtime<input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortAsc("playtime")} value="^"/><input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortDesc("playtime")} value="v"/></th>
                 <th style={{width: "5%"}}>Title-Track</th>
-                <th style={{width: "5%"}}>Ranking</th>
-                <th style={{width: "20%"}}>Actions</th>
+                <th style={{width: "11%"}}>Ranking<input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortAsc("ranking")} value="^"/><input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortDesc("ranking")} value="v"/></th>
+                <th style={{width: "13%"}}>Actions</th>
                 </tr>
             </thead>
         )
@@ -214,7 +253,7 @@ class Admin extends Component{
             <thead>
                 <tr>
                 <th style={{width: "2%"}}>ID</th>
-                <th style={{width: "8%"}}>Name</th>
+                <th style={{width: "8%"}}>Name<input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortAsc("name")} value="^"/><input type="button" className="btn btn-info" style={{"margin-left":"10px"}} onClick={()=>this.sortDesc("name")} value="v"/></th>
                 <th style={{width: "20%"}}>Actions</th>
                 </tr>
             </thead>
@@ -268,6 +307,10 @@ class Admin extends Component{
         )
     }
 
+    onGenreSelect(value){
+        this.setState({selectedGenres: value})
+    }
+
     renderDataInput(){
         return(
             {
@@ -284,8 +327,9 @@ class Admin extends Component{
                             <td><input type="text" id="addAlbum" ref="addAlbum" placeholder="Enter Album Name" style={{width: 200}}/></td>
                             <td><input type="text" id="addReleaseDate" ref="addReleaseDate" placeholder="Enter release date" style={{width: 120}}/></td>
                             <td><input type="text" id="addAlbumArt" ref="addAlbumArt" placeholder="Enter picture link" /></td>
-                            <td><textarea id="addDescription" ref="addDescription" placeholder="Enter album description" style={{resize:"none"}} rows= '4' cols= '60'/></td>
-                            <td>
+                            <td style={{width: "10%"}}><textarea id="addDescription" ref="addDescription" placeholder="Enter album description" style={{resize:"none"}} rows= '4' cols= '40'/></td>
+                            <td style={{width: "20%"}}><IntegrationReactSelect onGenre={this.onGenreSelect.bind(this)}/></td>
+                            <td style={{width: "8%"}}>
                                 <input type="button" className="btn btn-info" style={{width: 70}} onClick={()=>this.onEnterClickAlbums()} value="Enter"/>
                             </td>
                         </tr>

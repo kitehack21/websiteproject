@@ -4028,6 +4028,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   line-height: 1.42857143;
   border: 1px solid transparent;
   border-radius: 4px 4px 0 0;
+  background-color: #e0eaec
 }
 .nav-tabs > li > a:hover {
   border-color: #eee #eee #ddd;
@@ -4087,9 +4088,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .nav-pills > li {
   float: left;
+  
 }
 .nav-pills > li > a {
-  border-radius: 4px;
+  border-radius: 0px;
+  color: #fff;
+  background-color: #36b0c8
 }
 .nav-pills > li + li {
   margin-left: 2px;
@@ -6783,4 +6787,7 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+.artist-tabs{
+  border-radius: 0px
 }

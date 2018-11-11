@@ -230,7 +230,7 @@ a.list-group-item:focus {
 }
 .nav-pills > li.active > a {
   color: #fff !important;
-  background-color: #4cb6cb;
+  background-color: #337ab7;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -2995,6 +2995,9 @@ a.bg-light:focus {
 .padder-v {
   padding-top: 15px;
   padding-bottom: 15px;
+}
+.padder-bottom {
+  padding-bottom: 70px;
 }
 .no-padder {
   padding: 0 !important;

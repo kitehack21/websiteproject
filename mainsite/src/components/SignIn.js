@@ -17,12 +17,20 @@ class SignIn extends Component {
     }
 
     onLoginClick = () =>{
+      if(this.refs.email.value === "" || this.refs.password.value === ""){
+        alert("Please Fill All Forms")
+    }
       var email = this.refs.email.value;
       var password = this.refs.password.value;
 
       this.props.onLogin({email, password});
     }
 
+    onKeyPress(x) {
+      if (x.which == 13) {
+          this.onLoginClick()
+      }
+  }
     onRegisterClick = () =>{
       this.props.history.push("/RegisterPage")
     }
@@ -52,10 +60,10 @@ class SignIn extends Component {
             </header>
             <form>
               <div className="form-group">
-                <input type="email" ref="email" placeholder="Email" className="form-control rounded input-lg text-center no-border"/>
+                <input type="email" ref="email" placeholder="Email" className="form-control rounded input-lg text-center no-border"  onKeyPress={this.onKeyPress.bind(this)}/>
               </div>
               <div className="form-group">
-                 <input type="password" ref="password" placeholder="Password" className="form-control rounded input-lg text-center no-border"/>
+                 <input type="password" ref="password" placeholder="Password" className="form-control rounded input-lg text-center no-border"  onKeyPress={this.onKeyPress.bind(this)}/>
               </div>
               <Button onClick={()=>this.onLoginClick()} className="btn btn-lg btn-primary lt b-white b-2x btn-block btn-rounded"><i className="icon-arrow-right pull-right"></i><span className="m-r-n-lg">Sign in</span></Button>
               {this.errorRender()}

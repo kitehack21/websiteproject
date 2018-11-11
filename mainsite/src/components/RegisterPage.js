@@ -17,6 +17,9 @@ class RegisterPage extends Component {
     }
 
     onRegisterClick = () => {
+        if(this.refs.username.value === "" || this.refs.email.value === "" || this.refs.password.value === ""){
+            alert("Please Fill All Forms")
+        }
         this.props.onRegister({
             username: this.refs.username.value,
             email: this.refs.email.value,
@@ -28,7 +31,11 @@ class RegisterPage extends Component {
     onSignInClick = () =>{
         this.props.history.push("/SignIn")
     }
-
+    onKeyPress(x) {
+        if (x.which == 13) {
+            this.onRegisterClick()
+        }
+    }
     errorRender(){
         if(this.props.auth.error !== ""){
           return (
@@ -54,13 +61,13 @@ class RegisterPage extends Component {
                         </header>
                         <form action="index.html">
                         <div className="form-group">
-                            <input type="username" ref="username" placeholder="Username" className="form-control rounded input-lg text-center no-border"/>
+                            <input type="username" ref="username" placeholder="Username" className="form-control rounded input-lg text-center no-border"  onKeyPress={this.onKeyPress.bind(this)}/>
                         </div>
                         <div className="form-group">
-                            <input type="email" ref="email" placeholder="Email" className="form-control rounded input-lg text-center no-border"/>
+                            <input type="email" ref="email" placeholder="Email" className="form-control rounded input-lg text-center no-border"  onKeyPress={this.onKeyPress.bind(this)}/>
                         </div>
                         <div className="form-group">
-                            <input type="password" ref="password" placeholder="Password" className="form-control rounded input-lg text-center no-border"/>
+                            <input type="password" ref="password" placeholder="Password" className="form-control rounded input-lg text-center no-border"  onKeyPress={this.onKeyPress.bind(this)}/>
                         </div>
                         <div className="checkbox i-checks m-b">
                             <label className="m-l">

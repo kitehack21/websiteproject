@@ -38,6 +38,14 @@ app.get('/newreleases', function(req,res){
     })
 })
 
+app.get('/genres' , function(req,res){
+    var sql = "SELECT * FROM genres"
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send({genres:results});
+    })
+})
 app.get('/topsongs', function(req,res){
     console.log(req.query)
     var sql = `select tr.id as id, tr.name as track_name, tr.ranking as ranking, al.id as album_id, al.album_name as album_name, al.album_art as album_art, ar.id as artist_id, ar.name as artist_name from tracks tr JOIN albums al ON tr.album_id = al.id JOIN artists ar ON tr.artist_id = ar.id ORDER BY -ranking DESC LIMIT 6`
@@ -78,12 +86,16 @@ app.get('/artistinfo/:id', function(req,res){
 app.get('/albumAndTracks/:id', function(req,res){
     var sql = 'SELECT * FROM albums WHERE id=' + req.params.id
     var sql1 = 'SELECT * FROM tracks WHERE album_id=' + req.params.id
+    var sql2 = `SELECT g.id, g.name FROM genres g JOIN album_genres alg ON g.id=alg.genre_id JOIN albums al ON alg.album_id = al.id where al.id = ${req.params.id}`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
         conn.query(sql1, (err,results1)=>{
             if(err) throw err;
-            res.send({album: results, tracks:results1})
+            conn.query(sql2, (err, results2) => {
+                if(err) throw err
+                res.send({album: results, tracks:results1, genres: results2})
+            })
         })
     })
 })
@@ -112,19 +124,6 @@ app.get('/albums/browse', function(req,res){
         GROUP BY tr.album_id
         ORDER BY release_date DESC`
     }
-    conn.query(sql, (err,results)=>{
-        if(err) throw err;
-        console.log(results)
-        res.send({albums:results})
-    })
-})
-
-app.get('/albums/browse', function(req,res){
-    var sql = `SELECT al.id as album_id, ar.name as artist_name, album_art, album_name, artist_id
-    FROM albums al
-    JOIN artists ar
-    ON al.artist_id = ar.id
-    ORDER BY release_date DESC`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
@@ -239,6 +238,25 @@ app.post('/admin/:table', function(req,res){
     })
 })
 
+app.get("/suggestions", function(req,res){
+    sql = `SELECT al.id as id, artist_id, album_name, album_art FROM albums al join album_genres alg ON al.id = alg.album_id WHERE alg.genre_id = 1 `
+    conn.query(sql, (err,results)=>{
+        if(err) throw err
+        res.send(results)
+    })
+})
+
+app.post(`/albumgenres`, function(req,res){
+    var values = []
+    for(var index in req.body.genres){
+        values.push([req.body.album_id, req.body.genres[index].value])
+    }
+    sql1 = `INSERT INTO album_genres (album_id, genre_id) VALUES ?`
+    conn.query(sql1, [values], (err1,results1)=>{
+        if(err1) throw err1
+        res.send(results1)
+    })
+})
 app.delete('/admin/:table/:id', function(req,res){
     function tableselect(){
         return(
@@ -375,13 +393,42 @@ app.post('/subscribe', function(req,res){
         status : "active"
     }
 
-    sql= 'INSERT INTO subscriptions SET ? '
-    conn.query(sql, data, (err,results)=>{
+    sql = `SELECT * FROM subscriptions WHERE user_id = ${data.user_id} and status = "active"`
+    sql1= 'INSERT INTO subscriptions SET ? '
+    conn.query(sql, (err,results)=>{
         if(err) throw err
-        console.log(results)
-        res.send(results)
+        console.log(results.length)
+        if(results.length !== 0){
+            res.send({error : 1})
+        }
+        else{
+            conn.query(sql1, data, (err1,results1)=>{
+                if(err1) throw err1
+                console.log(results1)
+                res.send(results1)
+            })
+        }
     })
 })
+
+app.get("/substatus/:id", function(req,res){
+    sql = `SELECT sb.id as id, user_id, streampass_id, start_date, end_date, status, name, price FROM subscriptions sb JOIN streamingpass sp ON sb.streampass_id = sp.id WHERE user_id = ${req.params.id} ORDER BY start_date DESC, status`
+    conn.query(sql, (err1,results1)=>{
+        if(err1) throw err1
+        console.log(results1)
+        res.send(results1)
+    })
+})
+
+app.put("/subcancel/:id", function(req,res){
+    sql = `UPDATE subscriptions SET status="inactive" where id=${req.params.id} and status = "active"`
+    conn.query(sql, (err1,results1)=>{
+        if(err1) throw err1
+        console.log(results1)
+        res.send(results1)
+    })
+})
+
 
 // app.post('/upload', function(req, res) {
 //     if(req)

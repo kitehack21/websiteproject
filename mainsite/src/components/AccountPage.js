@@ -1,14 +1,34 @@
 import React, {Component} from 'react'
 import AccountTabs from './AccountTabs'
+import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
+import axios from 'axios'
+import {API_URL_1} from '../supports/api-url/apiurl'
+import {onUnSubcribe} from '../actions'
 
 class AccountPage extends Component{
-
+    state = {subdataCurrent: [], allsubdata: []}
     componentWillMount(){
+      this.refreshData()
+    }
 
+    refreshData(){
+      axios.get(API_URL_1 + "/substatus/" + this.props.auth.id)
+      .then((res) => {
+        var tempData = ""
+        for(var index in res.data){
+          if(res.data[index].status == "active"){
+            tempData = res.data[index]
+          }
+        }
+        this.setState({subdataCurrent: tempData, allsubdata: res.data})
+      })
     }
     
     render(){
+      if(this.props.auth.username !== ""){
         return(
+          <div className="col-md-push-2 col-md-8">
             <section id="content">
             <section className="vbox">
               <section className="scrollable">
@@ -22,8 +42,8 @@ class AccountPage extends Component{
                               <img src="images/a0.png" className="img-circle" alt=""/>
                             </a>
                             <div>
-                              <div className="h3 m-t-xs m-b-xs">John.Smith</div>
-                              <small className="text-muted"><i className="fa fa-map-marker"></i> London, UK</small>
+                              <div className="h3 m-t-xs m-b-xs">{this.props.auth.username}</div>
+                              <small className="text-muted"><i className="fa fa-map-marker"></i>{this.props.auth.email}</small>
                             </div>                
                           </div>
                           <div className="panel wrapper">
@@ -72,49 +92,21 @@ class AccountPage extends Component{
                       </section>
                     </section>
                   </aside>
-                 <AccountTabs/>
-                  <aside className="col-lg-3 b-l">
-                    <section className="vbox">
-                      <section className="scrollable padder-v">
-                        <div className="panel">
-                          <h4 className="font-thin padder">Latest Tweets</h4>
-                          <ul className="list-group">
-                            <li className="list-group-item">
-                                <p>Wellcome <a href="" className="text-info">@Drew Wllon</a> and play this web application template, have fun1 </p>
-                                <small className="block text-muted"><i className="fa fa-clock-o"></i> 2 minuts ago</small>
-                            </li>
-                            <li className="list-group-item">
-                                <p>Morbi nec <a href="" className="text-info">@Jonathan George</a> nunc condimentum ipsum dolor sit amet, consectetur</p>
-                                <small className="block text-muted"><i className="fa fa-clock-o"></i> 1 hour ago</small>
-                            </li>
-                            <li className="list-group-item">                     
-                                <p><a href="" className="text-info">@Josh Long</a> Vestibulum ullamcorper sodales nisi nec adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis</p>
-                                <small className="block text-muted"><i className="fa fa-clock-o"></i> 2 hours ago</small>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="panel clearfix">
-                          <div className="panel-body">
-                            <a href="" className="thumb pull-left m-r">
-                              <img src="images/a0.png" className="img-circle" alt=""/>
-                            </a>
-                            <div className="clear">
-                              <a href="" className="text-info">@Mike Mcalidek <i className="fa fa-twitter"></i></a>
-                              <small className="block text-muted">2,415 followers / 225 tweets</small>
-                              <a href="" className="btn btn-xs btn-success m-t-xs">Follow</a>
-                            </div>
-                          </div>
-                        </div>
-                      </section>
-                    </section>              
-                  </aside>
+                 <AccountTabs refresh={()=>{this.refreshData()}} unSub={()=>this.props.onUnSubcribe()} subscription={this.props.auth.subscription} subdataCurrent={this.state.subdataCurrent} allsubdata={this.state.allsubdata}/>
                 </section>
               </section>
             </section>
             <a href="" className="hide nav-off-screen-block" data-toggle="class:nav-off-screen,open" data-target="#nav,html"></a>
           </section>
+          </div>
         )
+      }
+      return <Redirect to = "/" />
     }
 }
 
-export default AccountPage
+const mapStateToProps = (state) => {
+  const auth = state.auth;
+  return {auth};
+}
+export default connect(mapStateToProps, {onUnSubcribe})(AccountPage)

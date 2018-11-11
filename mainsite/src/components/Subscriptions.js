@@ -2,10 +2,11 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 import {connect} from 'react-redux'
+import {onSubcribe} from '../actions'
 
 class Subscriptions extends Component{
 
-    onPurchaseClick(){
+    onPurchaseClick(id){
         console.log(this.props.auth)
         if(this.props.auth.id === ""){
             alert("Please Sign In/ Register an Account first before purchasing")
@@ -14,11 +15,18 @@ class Subscriptions extends Component{
         else{
             axios.post(API_URL_1 + "/subscribe",{
                 user_id: this.props.auth.id,
-                streampass_id: 1
+                streampass_id: id
             })
             .then((response)=>{
                 console.log(response.data)
-                alert("Streamingpass Purchased!")
+                if(response.data.error == 1){
+                    alert("Already Have Active Susbcription")
+                }
+                else{
+                    this.props.onSubcribe()
+                    alert("Streamingpass Purchased!")
+                }
+               
             })
             .catch((err)=>{
                 console.log(err)
@@ -48,7 +56,7 @@ class Subscriptions extends Component{
                                     <div><div className="label bg-success">Mobile</div>   ENABLE OFFLINE STORAGE ON MOBILE</div>
                                 </div>
                                 <div className="col-md-2 text-right padder-v"> Rp.80,000.-</div>
-                                <div className="col-md-3 text-right padder-v"><input className="btn btn-success" type="button" value="Purchase" onClick={()=>this.onPurchaseClick()}/></div>                      
+                                <div className="col-md-3 text-right padder-v"><input className="btn btn-success" type="button" value="Purchase" onClick={()=>this.onPurchaseClick(3)}/></div>                      
                             </div>
                         </div>
                     </section>
@@ -65,7 +73,7 @@ class Subscriptions extends Component{
                                     <div><div className="label bg-success">Mobile</div>   ENABLE OFFLINE STORAGE ON MOBILE</div>
                                 </div>
                                 <div className="col-md-2 text-right padder-v"> Rp.100,000.-</div>
-                                <div className="col-md-3 text-right padder-v"><input className="btn btn-success" type="button" value="Purchase" onClick={()=>this.onPurchaseClick()}/></div>                      
+                                <div className="col-md-3 text-right padder-v"><input className="btn btn-success" type="button" value="Purchase" onClick={()=>this.onPurchaseClick(1)}/></div>                      
                             </div>
                         </div>
                     </section>
@@ -83,7 +91,7 @@ class Subscriptions extends Component{
                                         <div><div className="label bg-success">PC | Mobile</div> DOWNLOAD 30 MP3s</div>
                                     </div>
                                     <div className="col-md-2 text-right padder-v"> Rp.250,000.-</div>
-                                    <div className="col-md-3 text-right padder-v"><input className="btn btn-success m-t-xs" type="button" value="Purchase" onClick={()=>this.onPurchaseClick()}/></div>                      
+                                    <div className="col-md-3 text-right padder-v"><input className="btn btn-success m-t-xs" type="button" value="Purchase" onClick={()=>this.onPurchaseClick(2)}/></div>                      
                             </div>
                             </div>
                     </section>
@@ -98,4 +106,4 @@ const mapStateToProps = (state) => {
     return {auth};
   }
 
-export default connect(mapStateToProps, {})(Subscriptions);
+export default connect(mapStateToProps, {onSubcribe})(Subscriptions);

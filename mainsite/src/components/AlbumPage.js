@@ -6,7 +6,7 @@ import AlbumPageDetails from './AlbumPageDetails'
 
 
 class AlbumPage extends Component{
-    state = {artist: [], album:[], tracks: []}
+    state = {artist: [], album:[], tracks: [], genres: []}
     
     componentWillMount(){
         const params = new URLSearchParams(this.props.location.search);
@@ -24,10 +24,29 @@ class AlbumPage extends Component{
         axios.get(API_URL_1 + '/albumAndTracks/' + album_id)
         .then(response1 => {
             console.log(response1);
-            this.setState({album: response1.data.album[0], tracks: response1.data.tracks});
+            this.setState({album: response1.data.album[0], tracks: response1.data.tracks, genres: response1.data.genres});
         });
     }
 
+    componentWillReceiveProps(newProps){
+        const params = new URLSearchParams(newProps.location.search);
+        const album_id = params.get('album')
+        const artist_id = params.get('artist')
+        console.log(album_id)
+        console.log(artist_id)
+
+        axios.get(API_URL_1 + '/artists/' + artist_id)
+        .then(response => {
+            console.log(response);
+            this.setState({artist: response.data[0]});
+        });
+
+        axios.get(API_URL_1 + '/albumAndTracks/' + album_id)
+        .then(response1 => {
+            console.log(response1);
+            this.setState({album: response1.data.album[0], tracks: response1.data.tracks, genres: response1.data.genres});
+        });
+    }
     renderAlbumPage = () => {
         return (<AlbumPageDetails 
             key = {this.state.album.id}
@@ -42,7 +61,10 @@ class AlbumPage extends Component{
             publisher = {this.state.album.release_date}
             description = {this.state.album.description}
             tracks = {this.state.tracks}
-            artist_id = {this.state.artist.id}/>)
+            artist_id = {this.state.artist.id}
+            genres = {this.state.genres}
+            history = {this.props.history}/>
+            )
     }
     
     render(){

@@ -1,18 +1,50 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Tracklist from './Tracklist'
-
+import axios from 'axios';
+import {API_URL_1, API_URL_ALBUM_COVERS} from '../supports/api-url/apiurl'
 
 
 class AlbumPageDetails extends Component {
+  state = {suggestions: []}
 
+  componentWillMount(){
+    axios.get(API_URL_1 + "/suggestions")
+    .then((res) => {
+      this.setState({suggestions : res.data})
+    })
+  }
   renderTracklist(){
     return (this.props.tracks.map(songs =>
       <Tracklist key={songs.id} id={songs.id} title={songs.name} playtime={songs.playtime} 
       title_track={songs.title_track} number = {songs.number}/>
     ))
   }
+
+  renderGenres(){
+    return (this.props.genres.map(genre => {
+      var genreURL = `/browse?genre=${genre.id}`
+      return(
+        <Link to={genreURL}><span className="badge bg-success">{genre.name}</span></Link>
+      )
+    }))
+  }
   
+  renderSuggestions(){
+    var arrJSX = this.state.suggestions.map((item) => {
+      return(
+        <article className="media">
+          <div className="pull-left thumb-md m-t-xs" style={{"cursor":"pointer"}} onClick={()=>{this.props.history.push(`/AlbumPage?album=${item.id}&artist=${item.artist_id}`)}}>
+            <img src={`${API_URL_ALBUM_COVERS}/${item.album_art}`} alt=""/>
+          </div>
+          <div className="media-body">                        
+            <a href="" className="font-semibold">{item.album_name}</a>
+          </div>
+        </article>
+      )
+    })
+    return arrJSX
+  }
     render(){
       var artistURL = "/ArtistPage?artist=" + this.props.artist_id
         return(
@@ -43,7 +75,7 @@ class AlbumPageDetails extends Component {
                             </tr>
                             <tr>
                               <td>Genre</td>
-                              <td className="pad-left">{this.props.genre}</td>
+                              <td className="pad-left">{this.renderGenres()}</td>
                             </tr>
                             <tr>
                               <td>Publisher</td>
@@ -65,121 +97,13 @@ class AlbumPageDetails extends Component {
                     <ul className="list-group list-group-lg">
                       {this.renderTracklist()}
                     </ul>
-                    <h4 className="m-t-lg m-b" id="comments">3 Comments</h4>
-                    <section className="comment-list block">
-                      <article id="comment-id-1" className="comment-item">
-                        <a className="pull-left thumb-sm">
-                          <img src="images/a0.png" className="img-circle" alt=""/>
-                        </a>
-                        <section className="comment-body m-b">
-                          <header>
-                            <a href=""><strong>John smith</strong></a>
-                            <label className="label bg-info m-l-xs">Editor</label> 
-                            <span className="text-muted text-xs block m-t-xs">
-                              24 minutes ago
-                            </span>
-                          </header>
-                          <div className="m-t-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum.</div>
-                        </section>
-                      </article>
-                      
-                      <article id="comment-id-2" className="comment-item comment-reply">
-                        <a className="pull-left thumb-sm">
-                          <img src="images/a1.png" className="img-circle" alt=""/>
-                        </a>
-                        <section className="comment-body m-b">
-                          <header>
-                            <a href=""><strong>John smith</strong></a>
-                            <label className="label bg-dark m-l-xs">Admin</label> 
-                            <span className="text-muted text-xs block m-t-xs">
-                              26 minutes ago
-                            </span>
-                          </header>
-                          <div className="m-t-sm">Lorem ipsum dolor sit amet, consecteter adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</div>
-                        </section>
-                      </article>
-                      
-                      <article id="comment-id-2" className="comment-item">
-                        <a className="pull-left thumb-sm">
-                          <img src="images/a2.png" className="img-circle" alt=""/>
-                        </a>
-                        <section className="comment-body m-b">
-                          <header>
-                            <a href=""><strong>John smith</strong></a>
-                            <label className="label bg-dark m-l-xs">Admin</label> 
-                            <span className="text-muted text-xs block m-t-xs">
-                              26 minutes ago
-                            </span>
-                          </header>
-                          <blockquote className="m-t">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                            <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
-                          </blockquote>
-                          <div className="m-t-sm">Lorem ipsum dolor sit amet, consecteter adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</div>
-                        </section>
-                      </article>
-                    </section>
-                    <h4 className="m-t-lg m-b">Leave a comment</h4>
-                    <form>
-                      <div className="form-group">
-                        <label>Comment</label>
-                        <textarea className="form-control" rows="5" placeholder="Type your comment"></textarea>
-                      </div>
-                      <div className="form-group">
-                        <button type="submit" className="btn btn-success">Submit comment</button>
-                      </div>
-                    </form>
                   </div>
                 </div>
                 <div className="col-sm-2 col-sm-push-1">
                   <div className="panel panel-default">
                     <div className="panel-heading">Suggestions</div>
                     <div className="panel-body">
-                      <article className="media">
-                        <a href="" className="pull-left thumb-md m-t-xs">
-                          <img src="images/m18.jpg" alt=""/>
-                        </a>
-                        <div className="media-body">                        
-                          <a href="" className="font-semibold">Bootstrap 3: What you need to know</a>
-                          <div className="text-xs block m-t-xs"><a href="">Travel</a> 2 minutes ago</div>
-                        </div>
-                      </article>
-                      <article className="media">
-                        <a href="" className="pull-left thumb-md m-t-xs">
-                          <img src="images/m19.jpg" alt=""/>
-                        </a>
-                        <div className="media-body">                        
-                          <a href="" className="font-semibold">Lorem ipsum dolor sit amet it.</a>
-                          <div className="text-xs block m-t-xs"><a href="">Design</a> 2 hours ago</div>
-                        </div>
-                      </article>
-                      <article className="media">
-                        <a href="" className="pull-left thumb-md m-t-xs">
-                          <img src="images/m20.jpg" alt=""/>
-                        </a>
-                        <div className="media-body">                        
-                          <a href="" className="font-semibold">Sed diam nonummy tincidunt ut laoreet</a>
-                          <div className="text-xs block m-t-xs"><a href="">MFC</a> 1 week ago</div>
-                        </div>
-                      </article>
-                      <article className="media">
-                        <a href="" className="pull-left thumb-md m-t-xs">
-                          <img src="images/m21.jpg" alt=""/>
-                        </a>
-                        <div className="media-body">                        
-                          <a href="" className="font-semibold">Lonummy nibh euismod sed laoreet</a>
-                          <div className="text-xs block m-t-xs"><a href="">MFC</a> 1 week ago</div>
-                        </div>
-                      </article>
-                      <article className="media">
-                        <a href="" className="pull-left thumb-md m-t-xs">
-                          <img src="images/m22.jpg" alt=""/>
-                        </a>
-                        <div className="media-body">                        
-                          <a href="" className="font-semibold">Mibh euismod tincidunt ut laoreet</a>
-                          <div className="text-xs block m-t-xs"><a href="">MFC</a> 1 week ago</div>
-                        </div>
-                      </article>
+                     {this.renderSuggestions()}
                     </div>
                   </div>
                 </div>

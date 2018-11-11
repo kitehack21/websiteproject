@@ -118,3 +118,19 @@ export const addQueueCookie = (cookie) =>{
         })
     }
 }
+
+export const onSubcribe = () => {
+    return(dispatch) => {
+        dispatch ({
+            type: "SUBSCRIBED"
+        })
+    }
+}
+
+export const onUnSubcribe = () => {
+    return(dispatch) => {
+        dispatch ({
+            type: "UNSUBSCRIBED"
+        })
+    }
+}

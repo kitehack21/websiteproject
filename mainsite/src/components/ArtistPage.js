@@ -35,12 +35,8 @@ class ArtistPage extends Component{
                 <div className="pull-right m-l">
                     Download
                 </div>
-                <a href="" className="jp-play-me m-r-sm pull-left">
-                    <i className="icon-control-play text"></i>
-                    <i className="icon-control-pause text-active"></i>
-                </a>
                 <div className="clear text-ellipsis text-left">
-                    <strong></strong>
+                    <strong>TRACKS</strong>
                     <span className="pad-left"></span>
                     <span className="text-muted"></span>
                 </div>
@@ -51,14 +47,14 @@ class ArtistPage extends Component{
     renderTracklist(){
         return (this.state.tracks.map(songs =>
           <Tracklist key={songs.id} id={songs.id} title={songs.track_name} playtime={songs.playtime} 
-          title_track={songs.title_track} number = {songs.number}/>
+          title_track={songs.title_track}/>
         ))
       }
 
 
     render(){
         return(
-            <div className="container-fluid animated fadeInUp">
+            <div className="container-fluid animated fadeInUp col-md-push-2 col-md-8 padder-bottom">
                 <section className="panel panel-default">
                     <div className="panel-body bg-dark dker" >
                         <div className="clearfix text-center m-t">
@@ -67,27 +63,22 @@ class ArtistPage extends Component{
                                     <img src={this.state.artist.picture} className="r r-2x img-full" alt="..."/>
                                 </div>
                                 <div className="h4 m-t m-b-xs">{this.state.artist.name}</div>
-                                <small className="text-muted m-b">Musical Artist</small>
-                            </div>                      
+                                <div className="text-muted">Debut Date: {this.state.artist.debut}</div>
+                                <div className="text-muted">Agency: {this.state.artist.agency}</div>
+                            </div>                 
                         </div>
                         </div>
                     
-                    <Tab.Container id="left-tabs-example" defaultActiveKey="home">
+                    <Tab.Container defaultActiveKey="tracks">
                     <Row>
                         <Col md={12}>
-                            <Nav bsStyle="pills" justified >
-                                <NavItem eventKey="home" md={4}>Home</NavItem>
+                            <Nav bsStyle="pills" justified>
                                 <NavItem eventKey="tracks" md={4}>Tracks</NavItem>
                                 <NavItem eventKey="albums" md={4}>Albums</NavItem>
                             </Nav>
                         </Col>
                         <Row>
                         <Tab.Content animation>
-                            <Tab.Pane eventKey="home">
-                            <Col md={12} mdPush={2}>
-                                HOME
-                            </Col>
-                            </Tab.Pane>
                             <Tab.Pane eventKey="tracks">
                             <Col xs={8} md={8} xsPush={2} mdPush={2}>
                                 {this.renderTracksHeader()}

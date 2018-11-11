@@ -50,7 +50,7 @@ class App extends Component {
     if(this.props.auth.cookieCheck === true){
       return (
         <div className="App">
-          <Header/>
+          <Header history={this.props.history}/>
           <div style={{"margin-bottom":"80px"}}>
             <Switch>
             <Route exact path="/" component = {HomePage}/>

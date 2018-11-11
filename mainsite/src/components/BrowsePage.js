@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {API_URL_1} from '../supports/api-url/apiurl'
+import {API_URL_1, API_URL_ALBUM_COVERS} from '../supports/api-url/apiurl'
 import {Tabs, Tab, Pagination} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 
 class BrowsePage extends Component{
     constructor(props, context) {
@@ -61,7 +62,7 @@ class BrowsePage extends Component{
             return this.state.albums.map(albums =>
                 <div>
                 <section className="col-xs-12 col-sm-6 col-md-4 bg-info dker list-group-item clearfix" style={{"padding":0}}>
-                    <aside className="col-xs-6 col-sm-6 col-md-6 bg-info dk padder-v"><img src={albums.album_art} className="img-full" alt={albums.album_art}/></aside>
+                    <aside className="col-xs-6 col-sm-6 col-md-6 bg-info dk padder-v" style={{"cursor":"pointer"}} onClick={()=>{this.props.history.push(`/AlbumPage?album=${albums.album_id}&artist=${albums.artist_id}`)}}><img src={`${API_URL_ALBUM_COVERS}/${albums.album_art}`} className="img-full" alt={albums.album_art}/></aside>
                     <section className="col-xs-6 col-sm-6 col-md-6">
                         <div className="col-md-12 text-ellipsis text-lg padding-v m-t-md" title={albums.album_name} >{albums.album_name}</div>
                         <div className="col-md-12 text-muted text-sm padding-v text-ellipsis" title={albums.artist_name}>{albums.artist_name}</div>
@@ -94,21 +95,6 @@ class BrowsePage extends Component{
                                 <section id="content" className="animated fadeInUp">
                                     {this.renderAlbumList()}
                                 </section>
-                                <Pagination>
-                                    <Pagination.First />
-                                    <Pagination.Prev />
-                                    <Pagination.Item>{1}</Pagination.Item>
-                                    <Pagination.Ellipsis />
-                                    <Pagination.Item>{10}</Pagination.Item>
-                                    <Pagination.Item>{11}</Pagination.Item>
-                                    <Pagination.Item active>{12}</Pagination.Item>
-                                    <Pagination.Item>{13}</Pagination.Item>
-                                    <Pagination.Item>{14}</Pagination.Item>
-                                    <Pagination.Ellipsis />
-                                    <Pagination.Item>{20}</Pagination.Item>
-                                    <Pagination.Next />
-                                    <Pagination.Last />
-                                </Pagination>
                                 </Tab>
                                 <Tab eventKey={1} title="R&B">
                                 <section id="content" className="animated fadeInUp">
