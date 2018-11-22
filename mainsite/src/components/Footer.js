@@ -10,7 +10,21 @@ import {addQueueCookie} from '../actions'
 
 const options = {
     // //audio lists model
-    // audioLists: [],
+    audioLists: [],
+    // [
+    //   {
+    //     cover: "http://localhost:1994/albumcovers/izone-coloriz.jpg"
+    //     musicSrc: "http://localhost:1994/tracks/IZONE/COLORIZ/01. 아름다운 색.mp3"
+    //     name: "Beautiful Color (아름다운 색)"
+    //     singer: "IZONE"
+    //   },
+    //   {
+    //     cover: "http://localhost:1994/albumcovers/izone-coloriz.jpg"
+    //     musicSrc: "http://localhost:1994/tracks/IZONE/COLORIZ/03. 라비앙로즈 (La Vie en Rose).mp3"
+    //     name: "La Vie En Rose"
+    //     singer: "IZONE"
+    //   }
+    // ]
   
     //default play index of the audio player  [type `number` default `0`]
     defaultPlayIndex: 0,
@@ -35,7 +49,7 @@ const options = {
     glassBg: false,
   
     //The next time you access the player, do you keep the last state  [type `Boolean` default `false`]
-    remember: true,
+    remember: false,
   
     //The Audio Can be deleted  [type `Boolean`, default `true`]
     remove: true,
@@ -199,6 +213,7 @@ const options = {
       var json_str = JSON.stringify(audioLists)
         cookies.set('queueCookie', json_str, {path: "/"})
         console.log("Make cookie")
+      addQueueCookie(audioLists)
     },
   
     onAudioPlayTrackChange(currentPlayIndex, audioLists, audioInfo) {
@@ -246,6 +261,7 @@ class Footer extends Component{
     const theCookie = cookies.get('queueCookie');
     console.log(theCookie)
     console.log(newProps.audioLists)
+    this.onAddAudio(newProps.audioLists)
     if(newProps.audioLists !== undefined){
         var json_str = JSON.stringify(newProps.audioLists)
         cookies.set('queueCookie', json_str, {path: "/"})
@@ -259,76 +275,32 @@ class Footer extends Component{
     state = {
       params: options
     };
-    onAddAudio = () => {
+    onAddAudio = (audio) => {
       const data = {
         ...this.state.params,
-        audioLists: [
-          ...this.state.params.audioLists,
-          {
-            name: "I'm new here",
-            singer: "jack",
-            cover: "http://www.lijinke.cn/music/1387583682387727.jpg",
-            musicSrc: "http://www.lijinke.cn/music/201711082.mp3"
-          }
-        ]
+        audioLists: audio
       };
       this.setState({
         params: data
       });
     };
-    extendsContent = () => {
-      const data = {
-        ...this.state.params,
-        extendsContent: [
-          <button key="button" onClick={() => swal("I extend content")}>
-            button
-          </button>
-        ]
-      };
-      this.setState({
-        params: data
-      });
-    };
-    onShowGlassBg = () => {
-      this.onChangeKey("glassBg");
-    };
-    onDrag = () => {
-      this.onChangeKey("drag");
-    };
-    onToggleMode = () => {
-      this.onChangeKey("toggleMode");
-    };
-    onSeeked = () => {
-      this.onChangeKey("seeked");
-    };
-    onChangeKey = key => {
-      const data = {
-        ...this.state.params,
-        [key]: !this.state.params[key]
-      };
-      this.setState({ params: data });
-    };
-    showMiniProcessBar = () => {
-      this.onChangeKey("showMiniProcessBar");
-    };
-    showMiniModeCover = () => {
-      this.onChangeKey("showMiniModeCover");
-    };
-    playModeShowTime = () => {
-      const data = {
-        ...this.state.params,
-        playModeShowTime: createRandomNum(200, 2000)
-      };
-      this.setState({
-        params: data
-      });
-    };
+
+    onAudioListsChange = (currentPlayIndex, audioLists, audioInfo) => {
+      console.log("audio lists change:", currentPlayIndex);
+      console.log("audio lists change:", audioLists);
+      console.log("audio lists change:", audioInfo);
+      var json_str = JSON.stringify(audioLists)
+        cookies.set('queueCookie', json_str, {path: "/"})
+        console.log("Make cookie")
+      this.props.addQueueCookie(audioLists)
+    }
+
     
     render(){
       console.log(this.props.audioLists)
         const { params } = this.state;
         return(
-            <ReactJkMusicPlayer {...params} audioLists={this.props.audioLists}/>
+            <ReactJkMusicPlayer {...params} onAudioListsChange={this.onAudioListsChange}/>
         )
     }
 }

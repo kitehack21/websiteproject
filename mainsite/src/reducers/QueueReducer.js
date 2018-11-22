@@ -5,6 +5,8 @@ export default (state = INITIAL_STATE, action) =>{
     switch(action.type){
         case "ADD_TO_QUEUE" :
             return [...state, ...action.payload]
+        case "LOAD_QUEUE" :
+            return [...action.payload]
         default :   
             return state;
     }

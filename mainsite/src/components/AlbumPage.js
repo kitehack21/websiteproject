@@ -58,7 +58,7 @@ class AlbumPage extends Component{
             albumcover = {`${API_URL_ALBUM_COVERS}/${this.state.album.album_art}`} 
             release = {this.state.album.release_date}
             genre = {this.state.album.release_date}
-            publisher = {this.state.album.release_date}
+            publisher = {this.state.artist.agency}
             description = {this.state.album.description}
             tracks = {this.state.tracks}
             artist_id = {this.state.artist.id}

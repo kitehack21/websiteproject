@@ -113,7 +113,7 @@ export const addQueue = (id) =>{
 export const addQueueCookie = (cookie) =>{
     return(dispatch) => {
         dispatch ({
-            type: "ADD_TO_QUEUE",
+            type: "LOAD_QUEUE",
             payload: cookie
         })
     }
