@@ -1,12 +1,12 @@
 const express = require('express');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const crypto = require('crypto')
 const moment = require('moment');
 
-var app = express();
+const app = express();
 const port = 1994;
-var url = bodyParser.urlencoded({extended:false})
+const url = bodyParser.urlencoded({extended:false})
 const cors = require('cors');
 app.use(cors())
 
