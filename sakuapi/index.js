@@ -288,7 +288,7 @@ app.delete('/admin/:table/:id', function(req,res){
     })
 })
 
-var secret = "미야와키사쿠라宮脇"
+const secret = "미야와키사쿠라宮脇"
 
 app.get('/users', function(req,res){
     const cipher = crypto.createHmac("sha256", secret)
