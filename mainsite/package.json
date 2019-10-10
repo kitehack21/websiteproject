@@ -11,14 +11,15 @@
     "react": "^16.9.0",
     "react-bootstrap": "^0.32.3",
     "react-dom": "^16.9.0",
-    "react-jinke-music-player": "^4.0.4",
+    "react-jinke-music-player": "^4.4.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^3.1.1",
-    "react-select": "^2.1.1",
+    "react-select": "^2.4.4",
+    "reactstrap": "^8.0.1",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
-    "sweetalert": "^2.1.0",
+    "sweetalert": "^2.1.2",
     "universal-cookie": "^3.0.4"
   },
   "scripts": {
